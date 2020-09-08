@@ -1,0 +1,14 @@
+.Log {
+  height: 100vh;
+}
+
+.Log-Content {
+  overflow-y: scroll;
+  height: 87vh;
+}
+
+.Log-chat-form {
+  position: absolute;
+  bottom: 12px;
+  width: 40%;
+}

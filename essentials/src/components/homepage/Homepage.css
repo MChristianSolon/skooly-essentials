@@ -1,0 +1,11 @@
+.Homepage {
+  width: 30%;
+  margin: auto;
+}
+
+.homepage-slogan {
+  position: absolute;
+  top: 20%;
+  right: 35%;
+  transform: rotate(7deg);
+}

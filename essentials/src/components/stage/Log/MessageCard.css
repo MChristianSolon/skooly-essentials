@@ -1,0 +1,7 @@
+.Message-card {
+  width: fit-content;
+  margin: 20px;
+}
+.Message-cardHeader {
+  color: black;
+}
