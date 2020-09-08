@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Background from '../homepage/Background';
 import './TeacherMenu.css';
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -22,6 +23,7 @@ function TeacherMenu() {
   }
   return (
     <div className="TeacherMenu">
+      <Background />
       <form>
         <input
           type="text"
