@@ -26,12 +26,14 @@ function TeacherMenu() {
       <Background />
       <form>
         <input
+          className="teacher-input"
           type="text"
           name="YoutubeLink"
           placeholder="Enter Youtube URL"
           onChange={handleChangeLink}
         />
         <input
+          className="teacher-input"
           type="text"
           name="RelevantLink"
           placeholder="Relevant link"

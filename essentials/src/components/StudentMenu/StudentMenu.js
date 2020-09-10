@@ -17,6 +17,7 @@ function StudentMenu() {
       <Background />
       <form onSubmit={handleSubmit}>
         <input
+          className="student-input"
           type="text"
           name="studentURL"
           placeholder="Enter Url"

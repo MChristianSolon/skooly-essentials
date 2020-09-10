@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { db, timestamp } from '../../../Firebase/Firebase';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Send from '@material-ui/icons/Send';
+import './MessageCard.css';
 
 function MessageForm({ currentUser }) {
   const [message, setMessage] = useState('');
@@ -18,16 +21,22 @@ function MessageForm({ currentUser }) {
     });
   }
   return (
-    <div className="Log-chat-form">
-      <form onSubmit={handleSubmit}>
-        <TextField
-          variant="filled"
-          value={message}
-          onChange={handleChange}
-          style={{ width: '60%' }}
-        />
-      </form>
-    </div>
+    <form autoComplete="off" onSubmit={handleSubmit}>
+      <TextField
+        label="Enter A Message"
+        variant="filled"
+        className="chat-field"
+        value={message}
+        onChange={handleChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Send />
+            </InputAdornment>
+          ),
+        }}
+      />
+    </form>
   );
 }
 

@@ -22,10 +22,8 @@ function Log({ currentUser }) {
   return (
     <div>
       <Card className="Log" variant="elevation">
-        <CardContent className="Log-Content">
-          {messages}
-          <MessageForm currentUser={currentUser} />
-        </CardContent>
+        <CardContent className="Log-Content">{messages}</CardContent>
+        <MessageForm currentUser={currentUser} />
       </Card>
     </div>
   );

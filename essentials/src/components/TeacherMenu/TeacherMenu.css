@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-input {
+.teacher-input {
   background: rgba(255, 255, 255, 0.4);
   margin-left: 20px;
   border: none;
@@ -15,15 +15,15 @@ input {
   -webkit-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
-::-webkit-input-placeholder {
+.teacher-input::-webkit-input-placeholder {
   color: #666;
 }
-:-moz-placeholder {
+.teacher-input:-moz-placeholder {
   color: #666;
 }
-::-moz-placeholder {
+.teacher-input::-moz-placeholder {
   color: #666;
 }
-:-ms-input-placeholder {
+.teacher-input:-ms-input-placeholder {
   color: #666;
 }
