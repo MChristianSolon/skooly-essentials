@@ -1,5 +1,5 @@
 body {
-  color: white;
+  margin: 0px;
 }
 a {
   text-decoration: none;
@@ -7,26 +7,6 @@ a {
 h1 {
   font-size: 54px;
   float: left;
-}
-.selectionMenu-skooly {
-  animation-name: vibrant;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  display: inline-block;
-}
-.selectionMenu {
-  margin: auto;
-  width: 50%;
-  margin-top: 20px;
-}
-.selectionMenu-button {
-  width: 50%;
-  height: 200px;
-}
-
-.selectionMenu-user {
-  display: inline-block;
-  color: rgb(255, 83, 83);
 }
 
 @keyframes vibrant {

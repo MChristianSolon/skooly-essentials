@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Background from '../homepage/Background';
 import './TeacherMenu.css';
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -10,7 +9,7 @@ import { Link, useParams } from 'react-router-dom';
 function TeacherMenu() {
   let { user } = useParams();
   const [youtubeLink, setYoutubeLink] = useState('');
-  const [relevantLink, setRelevantLink] = useState('');
+  const [setRelevantLink] = useState('');
 
   function handleChangeLink(event) {
     event.preventDefault();
@@ -23,7 +22,6 @@ function TeacherMenu() {
   }
   return (
     <div className="TeacherMenu">
-      <Background />
       <form>
         <input
           className="teacher-input"

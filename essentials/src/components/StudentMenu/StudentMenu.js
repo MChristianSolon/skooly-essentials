@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import Background from '../homepage/Background';
 import './StudentMenu.css';
 function StudentMenu() {
   const [url, setURL] = useState('');
@@ -14,7 +13,6 @@ function StudentMenu() {
   }
   return (
     <div className="studentMenu">
-      <Background />
       <form onSubmit={handleSubmit}>
         <input
           className="student-input"

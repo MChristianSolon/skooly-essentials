@@ -4,9 +4,16 @@ import { db, timestamp } from '../../../Firebase/Firebase';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Send from '@material-ui/icons/Send';
 import './MessageCard.css';
+import { useParams } from 'react-router-dom';
 
-function MessageForm({ currentUser }) {
+function MessageForm({ currentUser, url }) {
   const [message, setMessage] = useState('');
+  const { user } = useParams();
+
+  //Current refresh fix
+  if (currentUser === 'Anonymous') {
+    currentUser = localStorage.getItem('currentUser');
+  }
 
   function handleChange(event) {
     setMessage(event.target.value);
@@ -14,7 +21,8 @@ function MessageForm({ currentUser }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    db.collection('messagesURL').add({
+    console.log(currentUser);
+    db.collection(`messages:${user}:${url}`).add({
       user: currentUser,
       text: message,
       time: timestamp(),

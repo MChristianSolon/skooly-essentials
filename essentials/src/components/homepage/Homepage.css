@@ -9,3 +9,7 @@
   right: 35%;
   transform: rotate(7deg);
 }
+
+.main-app {
+  height: 7vh;
+}

@@ -1,27 +1,38 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import Typography from '@material-ui/core/Typography';
 import './MessageCard.css';
 import { Avatar } from '@material-ui/core';
 
 function Message({ message, currentUser }) {
-  let style = {};
-  if (currentUser == message.user) {
-    style = {
-      color: 'blue',
+  let chat = {};
+  let chatCard = {};
+  if (message.user === currentUser) {
+    chat = {
+      background: '#4fc3f7',
+    };
+    chatCard = {
+      marginLeft: 'auto',
+      marginRight: '10px',
     };
   } else {
+    chat = {
+      background: '#bdbdbd',
+    };
+    chatCard = {
+      position: 'relative',
+    };
   }
   return (
-    <div className="Message-card" style={style}>
+    <div className="Message-card" style={chatCard}>
       <Card>
-        <CardHeader
-          className="Message-cardHeader"
-          avatar={<Avatar>{message.user[0]}</Avatar>}
-          title={`${message.user}: ${message.text}`}
-        ></CardHeader>
+        <div style={chat}>
+          <CardHeader
+            className="Message-cardHeader"
+            avatar={<Avatar>{message.user[0]}</Avatar>}
+            title={`${message.user}: ${message.text}`}
+          ></CardHeader>
+        </div>
       </Card>
     </div>
   );

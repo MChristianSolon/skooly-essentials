@@ -1,3 +1,6 @@
+body {
+  background-color: black;
+}
 .studentMenu {
   margin-top: 5%;
   text-align: center;
@@ -25,4 +28,8 @@
 }
 .student-input:-ms-input-placeholder {
   color: #666;
+}
+
+.selection-card {
+  height: 80vh;
 }

@@ -65,12 +65,13 @@ export default function JumboTron({ url }) {
 
       <CardContent>
         <iframe
+          title={url}
           width="900"
           height="650"
           src={`https://www.youtube.com/embed/${url}`}
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
         <Typography variant="body2" color="textSecondary" component="p">
           This a hot ass sun my boy
