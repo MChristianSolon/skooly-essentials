@@ -4,10 +4,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import './MessageCard.css';
 import { Avatar } from '@material-ui/core';
 
-function Message({ message, currentUser }) {
+function Message({ message }) {
   let chat = {};
   let chatCard = {};
-  if (message.user === currentUser) {
+  if (message.user === localStorage.getItem('currentUser')) {
     chat = {
       background: '#4fc3f7',
     };

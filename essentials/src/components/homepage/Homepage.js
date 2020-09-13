@@ -7,7 +7,7 @@ import SelectionMenu from '../SelectionMenu/SelectionMenu';
 import SkoolyLogo from '../../images/Essentials.png';
 import Slogan from '../../images/Slogan.png';
 import { UserContext } from '../Contexts/UserContext';
-import PrimaryAppBar from '../AppBar/PrimaryAppBar';
+
 import './Homepage.css';
 
 function Homepage() {
@@ -17,18 +17,15 @@ function Homepage() {
     if (user) {
       localStorage.setItem('currentUser', user.displayName);
       setCurrentUser(user.displayName);
-      console.log('You Are Logged in!', currentUser);
     } else {
-      console.log('error no one logged in');
       setCurrentUser(null);
     }
   });
 
   return (
-    <div class="main-app">
+    <div className="main-app">
       {currentUser ? (
-        <div class="SelectionMenu">
-          <PrimaryAppBar />
+        <div className="SelectionMenu">
           <SelectionMenu currentUser={currentUser} />
         </div>
       ) : (

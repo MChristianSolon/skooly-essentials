@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import TeacherMenu from './components/TeacherMenu/TeacherMenu';
 import StudentMenu from './components/StudentMenu/StudentMenu';
 import { UserContext } from './components/Contexts/UserContext';
+import PrimaryAppBar from './components/AppBar/PrimaryAppBar';
 
 import './App.css';
 
@@ -19,10 +20,11 @@ function App() {
       <div className="App">
         <Switch>
           <UserContext.Provider value={logProviderValue}>
-            <Route path="/" component={Homepage} />
+            <Route path="/" exact component={Homepage} />
+            <PrimaryAppBar />
             <Switch>
-              <Route path="/teacher/:user" exact component={TeacherMenu} />
-              <Route path="/student" exact component={StudentMenu} />
+              <Route path="/teacher/:user" component={TeacherMenu} />
+              <Route path="/student" component={StudentMenu} />
               <Route path="/stage/:user/:url" children={<Stage />} />
             </Switch>
           </UserContext.Provider>

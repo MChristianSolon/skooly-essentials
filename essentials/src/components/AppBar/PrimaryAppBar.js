@@ -147,20 +147,24 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {['Profile', 'Selection Menu', 'Create Page'].map((text, index) => (
-            <Link
-              to={
-                text === 'Create Page' ? `/teacher/${currentUser}` : `/student`
-              }
-            >
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            </Link>
-          ))}
+          {['Gallery', 'Profile', 'Selection Menu', 'Create Page'].map(
+            (text, index) => (
+              <Link
+                to={
+                  text === 'Create Page'
+                    ? `/teacher/${currentUser}`
+                    : `/student`
+                }
+              >
+                <ListItem button key={text}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              </Link>
+            )
+          )}
         </List>
         <Divider />
         <List>

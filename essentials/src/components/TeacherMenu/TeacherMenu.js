@@ -5,6 +5,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import LinkIcon from '@material-ui/icons/Link';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Link, useParams } from 'react-router-dom';
+import { db } from '../../Firebase/Firebase';
 
 function TeacherMenu() {
   let { user } = useParams();
@@ -19,6 +20,13 @@ function TeacherMenu() {
   function handleChangeRL(event) {
     event.preventDefault();
     setRelevantLink('haha');
+  }
+
+  function handleCreate() {
+    db.collection('videos').add({
+      publisher: localStorage.getItem('currentUser'),
+      videoUrl: youtubeLink,
+    });
   }
   return (
     <div className="TeacherMenu">
@@ -39,7 +47,11 @@ function TeacherMenu() {
         />
         <br></br>
         <br></br>
-        <Button variant="contained" startIcon={<AddCircleIcon />}>
+        <Button
+          variant="contained"
+          startIcon={<AddCircleIcon />}
+          onClick={handleCreate}
+        >
           Create Page
         </Button>
       </form>
