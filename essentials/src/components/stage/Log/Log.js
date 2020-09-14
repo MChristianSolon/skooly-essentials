@@ -13,6 +13,7 @@ function Log({ url }) {
   const { user } = useParams();
 
   useEffect(() => {
+    console.log('LogFUck');
     let action = db
       .collection(`messages:${user}:${url}`)
       .orderBy('time')
@@ -31,7 +32,7 @@ function Log({ url }) {
         });
         return action;
       });
-  }, []);
+  }, [currentUser, user, url]);
   return (
     <div>
       <Card className="Log" variant="elevation">

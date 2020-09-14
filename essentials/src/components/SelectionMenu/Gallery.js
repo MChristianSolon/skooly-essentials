@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { db } from '../../Firebase/Firebase';
+import React from 'react';
+import LecturesLogo from '../../images/Lectures.png';
 
 function Gallery() {
   //   useEffect(() => {
@@ -9,7 +9,15 @@ function Gallery() {
   //       });
   //     });
   //   }, []);
-  return <div>Gallery</div>;
+  return (
+    <div style={{ height: '16vh', marginBottom: '5vh' }}>
+      <img
+        src={LecturesLogo}
+        alt="LecturesLogo"
+        style={{ position: 'relative', bottom: '15vh' }}
+      />
+    </div>
+  );
 }
 
 export default Gallery;

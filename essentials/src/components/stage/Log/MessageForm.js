@@ -21,7 +21,6 @@ function MessageForm({ currentUser, url }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(currentUser);
     db.collection(`messages:${user}:${url}`).add({
       user: currentUser,
       text: message,

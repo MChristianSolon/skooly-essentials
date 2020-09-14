@@ -7,7 +7,6 @@ import SelectionMenu from '../SelectionMenu/SelectionMenu';
 import SkoolyLogo from '../../images/Essentials.png';
 import Slogan from '../../images/Slogan.png';
 import { UserContext } from '../Contexts/UserContext';
-
 import './Homepage.css';
 
 function Homepage() {
@@ -26,7 +25,7 @@ function Homepage() {
     <div className="main-app">
       {currentUser ? (
         <div className="SelectionMenu">
-          <SelectionMenu currentUser={currentUser} />
+          <SelectionMenu />
         </div>
       ) : (
         <div className="Homepage">

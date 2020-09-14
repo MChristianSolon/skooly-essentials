@@ -29,44 +29,46 @@ function TeacherMenu() {
     });
   }
   return (
-    <div className="TeacherMenu">
-      <form>
-        <input
-          className="teacher-input"
-          type="text"
-          name="YoutubeLink"
-          placeholder="Enter Youtube URL"
-          onChange={handleChangeLink}
-        />
-        <input
-          className="teacher-input"
-          type="text"
-          name="RelevantLink"
-          placeholder="Relevant link"
-          onChange={handleChangeRL}
-        />
+    <>
+      <div className="TeacherMenu">
+        <form>
+          <input
+            className="teacher-input"
+            type="text"
+            name="YoutubeLink"
+            placeholder="Enter Youtube URL"
+            onChange={handleChangeLink}
+          />
+          <input
+            className="teacher-input"
+            type="text"
+            name="RelevantLink"
+            placeholder="Relevant link"
+            onChange={handleChangeRL}
+          />
+          <br></br>
+          <br></br>
+          <Button
+            variant="contained"
+            startIcon={<AddCircleIcon />}
+            onClick={handleCreate}
+          >
+            Create Page
+          </Button>
+        </form>
         <br></br>
         <br></br>
-        <Button
-          variant="contained"
-          startIcon={<AddCircleIcon />}
-          onClick={handleCreate}
-        >
-          Create Page
-        </Button>
-      </form>
-      <br></br>
-      <br></br>
 
-      <Link to={`/stage/${user}/${youtubeLink}`}>
-        <Button variant="contained" startIcon={<ExitToAppIcon />}>
-          Go To Page
+        <Link to={`/stage/${user}/${youtubeLink}`}>
+          <Button variant="contained" startIcon={<ExitToAppIcon />}>
+            Go To Page
+          </Button>
+        </Link>
+        <Button variant="contained" startIcon={<LinkIcon />}>
+          Copy Url
         </Button>
-      </Link>
-      <Button variant="contained" startIcon={<LinkIcon />}>
-        Copy Url
-      </Button>
-    </div>
+      </div>
+    </>
   );
 }
 

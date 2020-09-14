@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     height: '100vh',
-    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -56,12 +55,13 @@ export default function LineGallery() {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ backgroundColor: 'white' }}>
       <GridList className={classes.gridList} cols={2.5}>
         {tileData.map((tile) => (
           <Link
             to={`/stage/${tile.author}/${tile.url}`}
             style={{ textDecoration: 'none' }}
+            key={tile.img}
           >
             <GridListTile key={tile.img}>
               <img src={tile.img} alt={tile.title} />

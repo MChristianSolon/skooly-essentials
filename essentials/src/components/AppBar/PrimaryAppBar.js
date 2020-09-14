@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: '#24305E',
+    color: 'white',
   },
   drawerHeader: {
     display: 'flex',
@@ -102,7 +104,10 @@ export default function PersistentDrawerLeft() {
   }
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      style={localStorage.getItem('currentUser') ? {} : { display: 'none' }}
+    >
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -153,12 +158,21 @@ export default function PersistentDrawerLeft() {
                 to={
                   text === 'Create Page'
                     ? `/teacher/${currentUser}`
+                    : text === 'Gallery'
+                    ? '/'
+                    : text == 'Profile'
+                    ? `/profile`
                     : `/student`
                 }
+                key={text}
               >
-                <ListItem button key={text}>
+                <ListItem button key={text} style={{ color: 'white' }}>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? (
+                      <InboxIcon style={{ color: 'white' }} />
+                    ) : (
+                      <MailIcon style={{ color: 'white' }} />
+                    )}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
@@ -171,7 +185,11 @@ export default function PersistentDrawerLeft() {
           {['Logout'].map((text, index) => (
             <ListItem button key={text} onClick={handleLogOut}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? (
+                  <InboxIcon style={{ color: 'white' }} />
+                ) : (
+                  <MailIcon style={{ color: 'white' }} />
+                )}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
