@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JumboTron({ url }) {
+export default function JumboTron({ url, publisher }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -51,7 +51,7 @@ export default function JumboTron({ url }) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {publisher[0]}
           </Avatar>
         }
         action={
@@ -92,10 +92,10 @@ export default function JumboTron({ url }) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          {/* <ExpandMoreIcon /> */}
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
@@ -125,7 +125,7 @@ export default function JumboTron({ url }) {
             serve.
           </Typography>
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }

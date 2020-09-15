@@ -10,7 +10,7 @@
 .chat-field {
   position: relative;
   bottom: -1vh;
-  width: 50%;
+  width: 100%;
   left: 2vh;
   padding: 0px;
 }

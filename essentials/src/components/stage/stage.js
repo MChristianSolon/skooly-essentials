@@ -4,6 +4,8 @@ import JumboTron from './JumboTron';
 import Grid from '@material-ui/core/Grid';
 import Log from './Log/Log';
 import Comments from './Comments/Comments';
+import RelatedLink from './RelatedLink/RelatedLink';
+
 import './Stage.css';
 
 function Stage() {
@@ -13,13 +15,16 @@ function Stage() {
     <div>
       <Grid container>
         <Grid item xs={7}>
-          <JumboTron url={url} />
+          <JumboTron url={url} publisher={user} />
         </Grid>
         <Grid item xs={5}>
-          <Log currentUser={user} url={url} />
+          <Log url={url} />
         </Grid>
         <Grid item xs={7}>
-          <Comments />
+          <RelatedLink />
+        </Grid>
+        <Grid item xs={5}>
+          <Comments url={url} publisher={user} />
         </Grid>
       </Grid>
     </div>

@@ -21,11 +21,15 @@ function MessageForm({ currentUser, url }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    db.collection(`messages:${user}:${url}`).add({
-      user: currentUser,
-      text: message,
-      time: timestamp(),
-    });
+    db.collection(`messages:${user}:${url}`)
+      .add({
+        user: currentUser,
+        text: message,
+        time: timestamp(),
+      })
+      .then(() => {
+        setMessage('');
+      });
   }
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
