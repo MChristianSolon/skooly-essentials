@@ -14,6 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JumboTron({ url, publisher }) {
+export default function JumboTron({ publisher }) {
+  const { url } = useParams();
+  console.log(url);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

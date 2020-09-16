@@ -27,3 +27,20 @@ h1 {
     color: rgb(172, 70, 255);
   }
 }
+
+.code-entry {
+  height: 80vh;
+}
+
+.enter-code-here {
+  margin: auto 0px;
+  position: absolute;
+  top: 25vh;
+  left: 13vw;
+}
+
+.to-do {
+  position: relative;
+  left: 40vw;
+  color: black;
+}

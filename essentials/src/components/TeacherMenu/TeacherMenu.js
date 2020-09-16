@@ -26,6 +26,7 @@ function TeacherMenu() {
     db.collection('videos').add({
       publisher: localStorage.getItem('currentUser'),
       videoUrl: youtubeLink,
+      code: Math.floor(Math.random() * 100000),
     });
   }
   return (
