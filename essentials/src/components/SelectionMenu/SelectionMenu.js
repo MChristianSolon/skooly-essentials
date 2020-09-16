@@ -88,7 +88,7 @@ function SelectionMenu() {
               <img
                 src={ComputerMan}
                 alt="ComputerMan"
-                style={{ width: '80vh', position: 'absolute', left: '45vw' }}
+                style={{ width: '80vh', position: 'relative', left: '3vw' }}
               />
             </div>
           </div>
@@ -123,7 +123,6 @@ function SelectionMenu() {
               />
             </form>
           </div>
-
           <LineGallery />
         </div>
       </div>

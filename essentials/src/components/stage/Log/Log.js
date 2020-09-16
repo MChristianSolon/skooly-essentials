@@ -13,7 +13,6 @@ function Log({ url }) {
   const { user } = useParams();
 
   useEffect(() => {
-    console.log('LogFUck');
     let action = db
       .collection(`messages:${user}:${url}`)
       .orderBy('time')

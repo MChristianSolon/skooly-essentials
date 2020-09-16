@@ -4,6 +4,8 @@ import List from '@material-ui/core/List';
 import SingleComment from './SingleComment';
 import CommentForm from './CommentForm';
 import { db } from '../../../Firebase/Firebase';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,11 +45,13 @@ export default function Comments({ url, publisher }) {
   }, []);
 
   return (
-    <>
-      <CommentForm url={url} publisher={publisher} />
-      <List className={classes.root} style={{ margin: '0px auto' }}>
-        {comments}
-      </List>
-    </>
+    <Card style={{ height: '100vh', overflow: 'scroll' }}>
+      <CardContent>
+        <CommentForm url={url} publisher={publisher} />
+        <List className={classes.root} style={{ margin: '0px auto' }}>
+          {comments}
+        </List>
+      </CardContent>
+    </Card>
   );
 }

@@ -27,6 +27,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    height: '5vh',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -125,11 +126,18 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <img
-            src={SkoolyIcon}
-            alt="SkoolyIcon"
-            style={{ width: '100px', position: 'absolute', marginLeft: '50px' }}
-          />
+          <Link to="/">
+            <img
+              src={SkoolyIcon}
+              alt="SkoolyIcon"
+              style={{
+                top: '-2vh',
+                width: '100px',
+                position: 'absolute',
+                marginLeft: '40vw',
+              }}
+            />
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

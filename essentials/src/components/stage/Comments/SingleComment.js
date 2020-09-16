@@ -17,7 +17,6 @@ import { IconButton } from '@material-ui/core';
 
 function SingleComment({ comment, user, time, id, url, publisher }) {
   function handleDelete() {
-    console.log(id);
     db.collection(`comments:${publisher}:${url}`)
       .doc(`${id}`)
       .delete()

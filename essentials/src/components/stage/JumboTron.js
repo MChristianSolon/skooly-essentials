@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function JumboTron({ publisher }) {
   const { url } = useParams();
-  console.log(url);
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

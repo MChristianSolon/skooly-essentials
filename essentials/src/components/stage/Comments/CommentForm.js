@@ -24,7 +24,7 @@ function CommentForm({ url, publisher }) {
     <div>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Enter A Message"
+          label="Ask A Question"
           variant="filled"
           className="chat-field"
           value={comment}
