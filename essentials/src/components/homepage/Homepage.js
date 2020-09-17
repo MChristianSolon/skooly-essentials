@@ -31,7 +31,11 @@ function Homepage() {
         <div>
           <div style={{ margin: '0 auto' }}>
             <Background />
-            <img src={SkoolyLogo} alt="skooly-logo" className="center" />
+            <img
+              src={SkoolyLogo}
+              alt="skooly-logo"
+              style={{ position: 'relative', marginLeft: '37vw' }}
+            />
             <img
               className="homepage-slogan"
               src={Slogan}
