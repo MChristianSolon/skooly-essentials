@@ -100,7 +100,7 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
     localStorage.clear();
     auth.signOut();
-    window.location.replace('https://naughty-rosalind-9b28a4.netlify.app/');
+    window.location.replace('https://skooly.ph/');
   }
 
   const handleMenu = (event) => {
