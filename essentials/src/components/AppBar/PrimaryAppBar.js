@@ -101,7 +101,7 @@ export default function PersistentDrawerLeft() {
   function handleLogOut() {
     localStorage.clear();
     auth.signOut();
-    window.location.replace('http://localhost:3000/');
+    window.location.replace('https://naughty-rosalind-9b28a4.netlify.app/');
   }
 
   return (
