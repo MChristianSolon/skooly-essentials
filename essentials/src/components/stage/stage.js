@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import JumboTron from './JumboTron';
 import Grid from '@material-ui/core/Grid';
@@ -19,6 +19,9 @@ function Stage() {
       }
     });
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

@@ -124,6 +124,7 @@ function SelectionMenu() {
             </form>
           </div>
           <LineGallery />
+          <LineGallery />
         </div>
       </div>
     </>
