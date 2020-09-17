@@ -29,7 +29,7 @@ function Homepage() {
         </div>
       ) : (
         <div>
-          <div className="Homepage">
+          <div style={{ margin: '0 auto' }}>
             <Background />
             <img src={SkoolyLogo} alt="skooly-logo" className="center" />
             <img
