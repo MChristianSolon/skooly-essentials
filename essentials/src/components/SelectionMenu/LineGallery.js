@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LineGallery() {
   const classes = useStyles();
   const [tileData, setTileData] = useState([
-    { img: 'hoho', title: '', author: 'haha' },
+    { img: '', title: '', author: '' },
   ]);
 
   useEffect(() => {

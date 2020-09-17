@@ -28,18 +28,21 @@ function Homepage() {
           <SelectionMenu />
         </div>
       ) : (
-        <div className="Homepage">
-          <Background />
-          <img src={SkoolyLogo} alt="skooly-logo"></img>
-          <img
-            className="homepage-slogan"
-            src={Slogan}
-            alt="homepage-slogan"
-          ></img>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={auth}
-          ></StyledFirebaseAuth>
+        <div>
+          <div className="Homepage">
+            <Background />
+            <img src={SkoolyLogo} alt="skooly-logo" className="center" />
+            <img
+              className="homepage-slogan"
+              src={Slogan}
+              alt="homepage-slogan"
+            ></img>
+            <StyledFirebaseAuth
+              className="center"
+              uiConfig={uiConfig}
+              firebaseAuth={auth}
+            ></StyledFirebaseAuth>
+          </div>
         </div>
       )}
     </div>
