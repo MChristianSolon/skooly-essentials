@@ -7,6 +7,7 @@ import SelectionMenu from '../SelectionMenu/SelectionMenu';
 import SkoolyLogo from '../../images/Essentials.png';
 import Slogan from '../../images/Slogan.png';
 import { UserContext } from '../Contexts/UserContext';
+
 import './Homepage.css';
 
 function Homepage() {
@@ -29,23 +30,33 @@ function Homepage() {
         </div>
       ) : (
         <div>
-          <div style={{ margin: '0 auto' }}>
+          <div>
             <Background />
-            <img
-              src={SkoolyLogo}
-              alt="skooly-logo"
-              style={{ position: 'relative', marginLeft: '37vw' }}
-            />
-            <img
-              className="homepage-slogan"
-              src={Slogan}
-              alt="homepage-slogan"
-            ></img>
-            <StyledFirebaseAuth
-              className="center"
-              uiConfig={uiConfig}
-              firebaseAuth={auth}
-            ></StyledFirebaseAuth>
+            <center>
+              <div style={{ marginBottom: '5px' }}>
+                <img src={SkoolyLogo} alt="skooly-logo" />
+              </div>
+              <br></br>
+              <img
+                src={Slogan}
+                alt="homepage-slogan"
+                style={{ position: 'relative', bottom: '40vh' }}
+              />
+              <div
+                style={{
+                  margin: 'auto',
+                  position: 'relative',
+                  bottom: '500px',
+                }}
+              >
+                <div>
+                  <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={auth}
+                  ></StyledFirebaseAuth>
+                </div>
+              </div>
+            </center>
           </div>
         </div>
       )}

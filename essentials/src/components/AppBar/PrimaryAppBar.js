@@ -133,18 +133,7 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Link to="/">
-            <img
-              src={SkoolyIcon}
-              alt="SkoolyIcon"
-              style={{
-                top: '-2vh',
-                width: '100px',
-                position: 'absolute',
-                marginLeft: '40vw',
-              }}
-            />
-          </Link>
+
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -185,6 +174,18 @@ export default function PersistentDrawerLeft() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <Link to="/">
+            <img
+              src={SkoolyIcon}
+              alt="SkoolyIcon"
+              style={{
+                top: '-2vh',
+                width: '100px',
+                position: 'absolute',
+                left: '45vw',
+              }}
+            />
+          </Link>
         </Toolbar>
       </AppBar>
       {/* <Drawer

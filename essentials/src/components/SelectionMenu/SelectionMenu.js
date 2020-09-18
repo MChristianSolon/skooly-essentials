@@ -76,7 +76,7 @@ function SelectionMenu() {
         ''
       )}
       <div className="SelectionMenu">
-        <div style={{ marginTop: '6vh', textAlign: 'center' }}>
+        <div style={{ marginTop: '6vh' }}>
           <div className="code-entry">
             <h1 className="to-do">Join A Room</h1>
             <h1 className="enter-code-here">Please Enter The Code</h1>
@@ -88,62 +88,75 @@ function SelectionMenu() {
                 label="CODE"
                 variant="filled"
                 style={{
-                  position: 'absolute',
-                  top: '40vh',
-                  left: '15vw',
+                  position: 'relative',
+                  top: '35vh',
+                  right: '28vw',
                   width: '35vw',
+                  marginLeft: '15vw',
                 }}
                 value={code}
                 onChange={handlChange}
                 autoComplete="off"
               />
             </form>
-            <div style={{ backgroundColor: 'white', width: '100%' }}>
-              <img
-                src={ComputerMan}
-                alt="ComputerMan"
-                style={{ width: '80vh', position: 'relative', left: '3vw' }}
-              />
-            </div>
+            <img
+              src={ComputerMan}
+              alt="ComputerMan"
+              style={{
+                width: '80vh',
+                position: 'absolute',
+                left: '45vw',
+                bottom: '130px',
+              }}
+            />
           </div>
 
-          <div style={{ height: '500px', backgroundColor: '#F8E9A1' }}>
+          <div
+            style={{
+              height: '65vh',
+              backgroundColor: '#F8E9A1',
+              minWidth: '100vw',
+            }}
+          >
             <img
               src={Heart}
               alt="Heart"
               style={{
-                width: '600px',
-                position: 'relative',
-                right: '55vw',
-                bottom: '4vh',
+                width: '35vw',
+                position: 'absolute',
+                left: '0px',
               }}
             />
-            <h1 className="to-do">Create A Page</h1>
-            <h1 style={{ position: 'relative', left: '38vw', top: '10vh' }}>
-              Enter a Url
+            <h1 style={{ margin: 'auto', position: 'relative', left: '35vw' }}>
+              Create A Page
             </h1>
+
             <form onSubmit={createPage}>
+              <h1 style={{ position: 'relative', left: '25vw', top: '15vh' }}>
+                {' '}
+                Enter Url
+              </h1>
               <TextField
                 error={validCreate}
                 helperText={validCreate ? 'Invalid Url' : ''}
                 id="filled-basic"
                 label="Enter Youtube Video Link Here"
                 variant="filled"
-                style={{
-                  poistion: 'relative',
-                  bottom: '40vh',
-                  width: '35vw',
-                  left: '20vw',
-                }}
                 onChange={createChange}
                 autoComplete="off"
+                style={{
+                  position: 'relative',
+                  top: '35vh',
+                  width: '35vw',
+                  right: '3vw',
+                }}
               />
             </form>
           </div>
-          <LineGallery />
-          <LineGallery />
         </div>
       </div>
+      <LineGallery />
+      <LineGallery />
     </>
   );
 }

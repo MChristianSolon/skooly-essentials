@@ -1,11 +1,11 @@
 body {
-  margin: 0px;
+  overflow-x: hidden;
 }
 a {
   text-decoration: none;
 }
 h1 {
-  font-size: 54px;
+  font-size: 4vw;
   float: left;
 }
 
@@ -33,14 +33,13 @@ h1 {
 }
 
 .enter-code-here {
-  margin: auto 0px;
   position: absolute;
-  top: 25vh;
-  left: 13vw;
+  top: 23vh;
+  left: 8vw;
 }
 
 .to-do {
   position: relative;
-  left: 40vw;
-  color: black;
+  left: 35vw;
+  bottom: 20px;
 }
