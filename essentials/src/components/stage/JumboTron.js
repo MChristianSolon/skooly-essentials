@@ -16,7 +16,8 @@ import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 1000,
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
   media: {
     height: 0,
@@ -67,8 +68,8 @@ export default function JumboTron({ publisher }) {
       <CardContent>
         <iframe
           title={url}
-          width="900"
-          height="650"
+          width="100%"
+          height="650px"
           src={`https://www.youtube.com/embed/${url}`}
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

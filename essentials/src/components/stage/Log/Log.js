@@ -35,7 +35,9 @@ function Log({ url }) {
   return (
     <div>
       <Card className="Log" variant="elevation">
-        <CardContent className="Log-Content">{messages}</CardContent>
+        <CardContent className="Log-Content" style={{ height: '92%' }}>
+          {messages}
+        </CardContent>
         <MessageForm currentUser={currentUser} url={url} />
       </Card>
     </div>

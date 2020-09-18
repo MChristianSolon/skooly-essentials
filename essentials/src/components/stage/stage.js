@@ -25,9 +25,9 @@ function Stage() {
 
   return (
     <div>
-      <p style={{ textAlign: 'right' }}>
+      <h2 style={{ textAlign: 'right' }}>
         code: <b>{code}</b>
-      </p>
+      </h2>
       <Grid container>
         <Grid item xs={7}>
           <JumboTron url={url} publisher={user} />
