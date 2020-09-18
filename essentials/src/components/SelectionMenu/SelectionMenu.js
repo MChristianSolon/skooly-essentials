@@ -14,7 +14,8 @@ function SelectionMenu() {
   const [go, setGo] = useState(false);
   const [goCreate, setGoCreate] = useState(false);
   const [create, setCreate] = useState('');
-
+  const [validCreate, setValidCreate] = useState(false);
+  const [validTarget, setValidTarget] = useState(false);
   function handlChange(event) {
     setCode(event.target.value);
   }
@@ -25,7 +26,6 @@ function SelectionMenu() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('FUCK');
     db.collection('videos')
       .get()
       .then((snap) => {
@@ -34,17 +34,28 @@ function SelectionMenu() {
             setTarget(doc.data());
           }
         });
+      })
+      .then(() => {
+        if (target) {
+        } else {
+          setValidTarget(true);
+        }
       });
   }
 
   function createPage(event) {
     event.preventDefault();
-    db.collection('videos').add({
-      publisher: localStorage.getItem('currentUser'),
-      videoUrl: `${create.split('v=')[1]}`,
-      code: Math.floor(Math.random() * 10000),
-    });
-    setGoCreate(true);
+    console.log(create.split('v=')[1]);
+    if (create.split('v=')[1]) {
+      db.collection('videos').add({
+        publisher: localStorage.getItem('currentUser'),
+        videoUrl: `${create.split('v=')[1].split('&')[0]}`,
+        code: Math.floor(Math.random() * 10000),
+      });
+      setGoCreate(true);
+    } else {
+      setValidCreate(true);
+    }
   }
 
   useEffect(() => {
@@ -58,7 +69,7 @@ function SelectionMenu() {
       ) : goCreate ? (
         <Redirect
           to={`/stage/${localStorage.getItem('currentUser')}/${
-            create.split('v=')[1]
+            create.split('v=')[1].split('&')[0]
           }`}
         />
       ) : (
@@ -71,6 +82,8 @@ function SelectionMenu() {
             <h1 className="enter-code-here">Please Enter The Code</h1>
             <form onSubmit={handleSubmit}>
               <TextField
+                error={validTarget}
+                helperText={validTarget ? 'No Such Code Exists.' : ''}
                 id="filled-basic"
                 label="CODE"
                 variant="filled"
@@ -82,6 +95,7 @@ function SelectionMenu() {
                 }}
                 value={code}
                 onChange={handlChange}
+                autoComplete="off"
               />
             </form>
             <div style={{ backgroundColor: 'white', width: '100%' }}>
@@ -110,6 +124,8 @@ function SelectionMenu() {
             </h1>
             <form onSubmit={createPage}>
               <TextField
+                error={validCreate}
+                helperText={validCreate ? 'Invalid Url' : ''}
                 id="filled-basic"
                 label="Enter Youtube Video Link Here"
                 variant="filled"
@@ -120,6 +136,7 @@ function SelectionMenu() {
                   left: '20vw',
                 }}
                 onChange={createChange}
+                autoComplete="off"
               />
             </form>
           </div>
