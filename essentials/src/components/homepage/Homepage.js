@@ -37,11 +37,7 @@ function Homepage() {
                 <img src={SkoolyLogo} alt="skooly-logo" />
               </div>
               <br></br>
-              <img
-                src={Slogan}
-                alt="homepage-slogan"
-                style={{ position: 'relative', bottom: '40vh' }}
-              />
+
               <div
                 style={{
                   margin: 'auto',
@@ -49,7 +45,7 @@ function Homepage() {
                   bottom: '500px',
                 }}
               >
-                <div>
+                <div style={{ position: 'relative', top: '45vh' }}>
                   <StyledFirebaseAuth
                     uiConfig={uiConfig}
                     firebaseAuth={auth}
