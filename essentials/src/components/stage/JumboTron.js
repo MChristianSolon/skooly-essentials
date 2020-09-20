@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function JumboTron({ publisher, datePublish }) {
   const { url } = useParams();
-
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -62,7 +61,9 @@ export default function JumboTron({ publisher, datePublish }) {
           </IconButton>
         }
         title={publisher}
-        subheader={`Page created on: ${datePublish}`}
+        subheader={`Page created on: ${
+          datePublish.time ? datePublish.time.toDate() : 'loading...'
+        }`}
       />
 
       <CardContent>

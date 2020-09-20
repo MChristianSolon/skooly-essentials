@@ -16,11 +16,22 @@ function Stage() {
     snap.docs.forEach((doc) => {
       if ((doc.data().publisher = user) && doc.data().videoUrl == url) {
         setCode(doc.data().code);
-        setDatePubish(doc.data().time.toDate());
       }
     });
   });
+
   useEffect(() => {
+    console.log('dick');
+    db.collection('videos')
+      .get()
+      .then((snap) => {
+        snap.docs.forEach((doc) => {
+          if ((doc.data().publisher = user) && doc.data().videoUrl == url) {
+            setDatePubish(doc.data());
+            console.log(doc.data());
+          }
+        });
+      });
     window.scrollTo(0, 0);
   }, []);
 
