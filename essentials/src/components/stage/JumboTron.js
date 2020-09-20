@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JumboTron({ publisher }) {
+export default function JumboTron({ publisher, datePublish }) {
   const { url } = useParams();
 
   const classes = useStyles();
@@ -61,8 +61,8 @@ export default function JumboTron({ publisher }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Suns and Their Variations"
-        subheader="September 14, 2016"
+        title={publisher}
+        subheader={`Page created on: ${datePublish}`}
       />
 
       <CardContent>

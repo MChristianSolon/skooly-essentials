@@ -5,7 +5,7 @@ import ComputerMan from '../../images/ComputerMan.png';
 import './SelectionMenu.css';
 import TextField from '@material-ui/core/TextField';
 import Heart from '../../images/Heart.png';
-import { db } from '../../Firebase/Firebase';
+import { db, timestamp } from '../../Firebase/Firebase';
 import { Redirect } from 'react-router-dom';
 
 function SelectionMenu() {
@@ -51,6 +51,7 @@ function SelectionMenu() {
         publisher: localStorage.getItem('currentUser'),
         videoUrl: `${create.split('v=')[1].split('&')[0]}`,
         code: Math.floor(Math.random() * 10000),
+        time: timestamp(),
       });
       setGoCreate(true);
     } else {

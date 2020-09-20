@@ -5,7 +5,6 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Background from './Background';
 import SelectionMenu from '../SelectionMenu/SelectionMenu';
 import SkoolyLogo from '../../images/Essentials.png';
-import Slogan from '../../images/Slogan.png';
 import { UserContext } from '../Contexts/UserContext';
 
 import './Homepage.css';

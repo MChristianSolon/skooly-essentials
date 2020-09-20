@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { UserContext } from '../Contexts/UserContext';
-import SkoolyIcon from '../../images/Essentials.png';
+import SkoolyIcon from '../../images/LogoSolo.png';
 import { auth } from '../../Firebase/Firebase';
 import { Link } from 'react-router-dom';
 import AccountCircle from '@material-ui/icons/AccountCircle';
