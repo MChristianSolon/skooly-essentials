@@ -50,7 +50,9 @@ function Stage() {
       .update({
         relatedLink,
       })
-      .then(() => setRelatedLink(''));
+      .then(() => {
+        setRelatedLink('');
+      });
   }
   return (
     <div>
@@ -65,14 +67,14 @@ function Stage() {
           <Log url={url} />
         </Grid>
         <Grid item xs={7}>
-          {/* <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <TextField
               style={{ width: '100%' }}
               label="Enter A Shared Google Docs Link Here!"
               value={relatedLink}
               onChange={handleChange}
             />
-          </form> */}
+          </form>
           <RelatedLink pageId={pageId} />
         </Grid>
         <Grid item xs={5}>

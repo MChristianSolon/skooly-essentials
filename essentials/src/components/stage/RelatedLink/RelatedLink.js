@@ -2,21 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../../Firebase/Firebase';
 
 function RelatedLink({ pageId }) {
-  const [currentRelatedLink, setCurrentRelatedLink] = useState('');
+  const [currentRelatedLink, setCurrentRelatedLink] = useState(null);
   useEffect(() => {
-    if (pageId.length >= 1) {
-      db.collection('videos')
-        .doc(pageId)
-        .onSnapshot((doc) => setCurrentRelatedLink(doc.data().relatedLink));
-    }
+    setCurrentRelatedLink(null);
+    db.collection('videos').onSnapshot((snap) => {
+      snap.docs.forEach((doc) => {
+        if (doc.id == pageId) {
+          setCurrentRelatedLink(doc.data().relatedLink);
+        }
+      });
+    });
   }, [pageId]);
 
   return (
     <div>
-      <embed
-        src={`https://www.bing.com/?toWww=1&redig=D6AAEB2C5FE04D7E93346F9EC423ABA6`}
-        style={{ width: '100%', height: '100vh' }}
-      />
+      {currentRelatedLink ? (
+        <embed
+          key={currentRelatedLink}
+          id="stageFrame"
+          src={currentRelatedLink}
+          style={{ width: '100%', height: '100vh' }}
+        />
+      ) : (
+        <h2>Loading...</h2>
+      )}
     </div>
   );
 }
