@@ -18,6 +18,7 @@ export default function Comments({ url, publisher }) {
   const classes = useStyles();
   const [comments, setComments] = useState([]);
 
+  //getting comments
   useEffect(() => {
     db.collection(`comments:${publisher}:${url}`)
       .orderBy('time')
@@ -37,6 +38,7 @@ export default function Comments({ url, publisher }) {
                 }
                 publisher={publisher}
                 url={url}
+                subComments={doc.data().SubComments}
               />
             );
           })
