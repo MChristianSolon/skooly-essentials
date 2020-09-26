@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Gallery from './Gallery';
 import LineGallery from './LineGallery';
 import ComputerMan from '../../images/ComputerMan.png';
@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Heart from '../../images/Heart.png';
 import { db, timestamp } from '../../Firebase/Firebase';
 import { Redirect } from 'react-router-dom';
+import { SearchContext } from '../Contexts/SearchContext';
 
 function SelectionMenu() {
   const [code, setCode] = useState('');
@@ -16,8 +17,34 @@ function SelectionMenu() {
   const [create, setCreate] = useState('');
   const [validCreate, setValidCreate] = useState(false);
   const [validTarget, setValidTarget] = useState(false);
+  const { search } = useContext(SearchContext);
+  const [searchArr, setSearchArr] = useState([]);
+  const [searchVideos, setSearchVideos] = useState([]);
+
+  //Search Arrays
+
+  useEffect(() => {
+    setSearchArr(search);
+  }, [search]);
+
+  useEffect(() => {
+    setSearchVideos(() => {
+      let newArr = searchArr.map((data) => {
+        return (
+          <Gallery
+            key={Math.random()}
+            publisher={data.publisher}
+            url={data.url}
+          />
+        );
+      });
+      return newArr;
+    });
+  }, [search]);
+
   function handlChange(event) {
     setCode(event.target.value);
+    console.log(searchArr);
   }
 
   function createChange(event) {
@@ -30,7 +57,7 @@ function SelectionMenu() {
       .get()
       .then((snap) => {
         snap.docs.forEach((doc) => {
-          if (doc.data().code == code) {
+          if (doc.data().code === code) {
             setTarget(doc.data());
           }
         });
@@ -156,6 +183,7 @@ function SelectionMenu() {
           </div>
         </div>
       </div>
+      {searchVideos}
       <LineGallery />
       <LineGallery />
     </>

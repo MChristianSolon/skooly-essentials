@@ -18,7 +18,7 @@ function Stage() {
 
   db.collection('videos').onSnapshot((snap) => {
     snap.docs.forEach((doc) => {
-      if ((doc.data().publisher = user) && doc.data().videoUrl == url) {
+      if ((doc.data().publisher = user) && doc.data().videoUrl === url) {
         setCode(doc.data().code);
         setPageId(doc.id);
       }
@@ -30,7 +30,7 @@ function Stage() {
       .get()
       .then((snap) => {
         snap.docs.forEach((doc) => {
-          if ((doc.data().publisher = user) && doc.data().videoUrl == url) {
+          if ((doc.data().publisher = user) && doc.data().videoUrl === url) {
             setDatePubish(doc.data());
           }
         });

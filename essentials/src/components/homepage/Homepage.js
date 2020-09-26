@@ -6,7 +6,6 @@ import Background from './Background';
 import SelectionMenu from '../SelectionMenu/SelectionMenu';
 import SkoolyLogo from '../../images/Essentials.png';
 import { UserContext } from '../Contexts/UserContext';
-
 import './Homepage.css';
 
 function Homepage() {

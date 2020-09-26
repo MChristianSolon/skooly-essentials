@@ -7,7 +7,7 @@ function RelatedLink({ pageId }) {
     setCurrentRelatedLink(null);
     db.collection('videos').onSnapshot((snap) => {
       snap.docs.forEach((doc) => {
-        if (doc.id == pageId) {
+        if (doc.id === pageId) {
           setCurrentRelatedLink(doc.data().relatedLink);
         }
       });
