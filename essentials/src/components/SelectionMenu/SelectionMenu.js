@@ -163,7 +163,7 @@ function SelectionMenu() {
                 width: '80vh',
                 position: 'absolute',
                 left: '45vw',
-                bottom: '130px',
+                bottom: '145px',
               }}
             />
           </div>

@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    maxHeight: '70px',
   },
   search: {
     position: 'relative',
@@ -148,15 +149,22 @@ export default function PersistentDrawerLeft() {
               onChange={handleSearchText}
             />
           </div>
-          <Link to="/">
+          <Link
+            to="/"
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '60%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
             <img
               src={SkoolyIcon}
               alt="SkoolyIcon"
               style={{
-                top: '-2vh',
-                width: '100px',
-                position: 'absolute',
-                left: '45vw',
+                maxWidth: '120px',
+                margin: 'auto',
+                textAlign: 'center',
               }}
             />
           </Link>

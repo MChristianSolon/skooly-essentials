@@ -30,26 +30,27 @@ function Homepage() {
         <div>
           <div>
             <Background />
-            <center>
-              <div style={{ marginBottom: '5px' }}>
+            <center
+              style={{
+                marginBottom: '5px',
+                position: 'absolute',
+                left: '50%',
+                top: '40%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <div>
                 <img src={SkoolyLogo} alt="skooly-logo" />
               </div>
-              <br></br>
 
-              <div
+              <StyledFirebaseAuth
+                uiConfig={uiConfig}
+                firebaseAuth={auth}
                 style={{
                   margin: 'auto',
-                  position: 'relative',
-                  bottom: '500px',
+                  textAlign: 'center',
                 }}
-              >
-                <div style={{ position: 'relative', top: '45vh' }}>
-                  <StyledFirebaseAuth
-                    uiConfig={uiConfig}
-                    firebaseAuth={auth}
-                  ></StyledFirebaseAuth>
-                </div>
-              </div>
+              ></StyledFirebaseAuth>
             </center>
           </div>
         </div>
