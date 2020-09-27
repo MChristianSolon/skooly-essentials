@@ -8,7 +8,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { db } from '../../Firebase/Firebase';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',

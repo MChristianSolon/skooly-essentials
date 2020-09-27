@@ -8,6 +8,7 @@ import Heart from '../../images/Heart.png';
 import { db, timestamp } from '../../Firebase/Firebase';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../Contexts/SearchContext';
+import Grid from '@material-ui/core/Grid';
 
 function SelectionMenu() {
   const [code, setCode] = useState('');
@@ -18,33 +19,48 @@ function SelectionMenu() {
   const [validCreate, setValidCreate] = useState(false);
   const [validTarget, setValidTarget] = useState(false);
   const { search } = useContext(SearchContext);
-  const [searchArr, setSearchArr] = useState([]);
   const [searchVideos, setSearchVideos] = useState([]);
+  const [displaySearch, setDisplaySearch] = useState([]);
 
-  //Search Arrays
-
+  //Search All Arrays
   useEffect(() => {
-    setSearchArr(search);
-  }, [search]);
-
-  useEffect(() => {
-    setSearchVideos(() => {
-      let newArr = searchArr.map((data) => {
-        return (
-          <Gallery
-            key={Math.random()}
-            publisher={data.publisher}
-            url={data.url}
-          />
-        );
+    db.collection('videos').onSnapshot((snap) => {
+      setSearchVideos(() => {
+        let newArr = snap.docs.map((doc) => {
+          return (
+            <Gallery
+              key={Math.random()}
+              publisher={doc.data().publisher}
+              url={doc.data().videoUrl}
+              title={doc.data().title}
+            />
+          );
+        });
+        return newArr;
       });
-      return newArr;
     });
-  }, [search]);
+  }, []);
+
+  //Filter Arrays
+  useEffect(() => {
+    if (/.+/gi.test(search)) {
+      var regexp = new RegExp(search + '+', 'gi');
+      setDisplaySearch(() => {
+        return searchVideos.map((item) => {
+          //searching publisher for now
+          if (regexp.test(item.props.title)) {
+            return item;
+          }
+          return null;
+        });
+      });
+    } else {
+      setDisplaySearch([]);
+    }
+  }, [search, searchVideos]);
 
   function handlChange(event) {
     setCode(event.target.value);
-    console.log(searchArr);
   }
 
   function createChange(event) {
@@ -70,6 +86,7 @@ function SelectionMenu() {
       });
   }
 
+  //Page Creation
   function createPage(event) {
     event.preventDefault();
     console.log(create.split('v=')[1]);
@@ -86,6 +103,7 @@ function SelectionMenu() {
     }
   }
 
+  //Stage Redirect
   useEffect(() => {
     if (target) setGo(true);
   }, [target]);
@@ -103,7 +121,18 @@ function SelectionMenu() {
       ) : (
         ''
       )}
-      <div className="SelectionMenu">
+      <Grid
+        container
+        className="searchGallery"
+        style={displaySearch.length > 0 ? { marginTop: '100px' } : {}}
+        spacing={2}
+      >
+        {displaySearch}
+      </Grid>
+      <div
+        className="SelectionMenu"
+        style={displaySearch.length > 0 ? { display: 'none' } : {}}
+      >
         <div style={{ marginTop: '6vh' }}>
           <div className="code-entry">
             <h1 className="to-do">Join A Room</h1>
@@ -167,7 +196,7 @@ function SelectionMenu() {
               <TextField
                 error={validCreate}
                 helperText={validCreate ? 'Invalid Url' : ''}
-                id="filled-basic"
+                id="Url"
                 label="Enter Youtube Video Link Here"
                 variant="filled"
                 onChange={createChange}
@@ -183,8 +212,6 @@ function SelectionMenu() {
           </div>
         </div>
       </div>
-      {searchVideos}
-      <LineGallery />
       <LineGallery />
     </>
   );

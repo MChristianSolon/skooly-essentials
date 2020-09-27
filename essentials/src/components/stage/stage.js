@@ -15,6 +15,7 @@ function Stage() {
   let [datePublish, setDatePubish] = useState('');
   let [relatedLink, setRelatedLink] = useState('');
   let [pageId, setPageId] = useState('');
+  let [documentId, setDocumentId] = useState(null);
 
   db.collection('videos').onSnapshot((snap) => {
     snap.docs.forEach((doc) => {
@@ -32,12 +33,13 @@ function Stage() {
         snap.docs.forEach((doc) => {
           if ((doc.data().publisher = user) && doc.data().videoUrl === url) {
             setDatePubish(doc.data());
+            setDocumentId(doc.id);
           }
         });
       });
 
     window.scrollTo(0, 0);
-  }, []);
+  }, [user, url]);
 
   function handleChange(event) {
     setRelatedLink(event.target.value);
@@ -61,7 +63,12 @@ function Stage() {
       </h2>
       <Grid container>
         <Grid item xs={7}>
-          <JumboTron url={url} publisher={user} datePublish={datePublish} />
+          <JumboTron
+            url={url}
+            publisher={user}
+            datePublish={datePublish}
+            docId={documentId}
+          />
         </Grid>
         <Grid item xs={5}>
           <Log url={url} />

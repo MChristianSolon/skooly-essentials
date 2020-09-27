@@ -17,7 +17,7 @@ function App() {
     setCurrentUser,
   ]);
 
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
   const searchProviderValue = useMemo(() => ({ search, setSearch }), [
     search,
     setSearch,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
-import { db } from '../../Firebase/Firebase';
 import './AppBar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,8 +72,7 @@ export default function PersistentDrawerLeft() {
   const { currentUser } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [searchText, setSearchText] = useState(null);
-  const { setSearch } = useContext(SearchContext);
+  const { search, setSearch } = useContext(SearchContext);
 
   function handleLogOut() {
     setAnchorEl(null);
@@ -84,29 +82,7 @@ export default function PersistentDrawerLeft() {
   }
 
   function handleSearchText(event) {
-    setSearchText(event.target.value);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let searchArr = [];
-
-    db.collection('videos').onSnapshot((snap) => {
-      if (searchText) {
-        snap.docs.map((doc) => {
-          var regexp = new RegExp('^' + searchText + '+', 'gi');
-          if (regexp.test(doc.data().publisher)) {
-            searchArr.push({
-              publisher: doc.data().publisher,
-              url: doc.data().videoUrl,
-            });
-          }
-        });
-      }
-    });
-
-    //The Current Search
-    setSearch(searchArr);
+    setSearch(event.target.value);
   }
 
   const handleMenu = (event) => {
@@ -154,25 +130,23 @@ export default function PersistentDrawerLeft() {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>{currentUser}</MenuItem>
             <MenuItem onClick={handleLogOut}>Log-Out</MenuItem>
           </Menu>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <form onSubmit={handleSubmit}>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-                value={searchText}
-                onChange={handleSearchText}
-              />
-            </form>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onChange={handleSearchText}
+            />
           </div>
           <Link to="/">
             <img

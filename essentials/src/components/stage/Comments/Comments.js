@@ -44,7 +44,7 @@ export default function Comments({ url, publisher }) {
           })
         );
       });
-  }, []);
+  }, [publisher, url]);
 
   return (
     <Card style={{ height: '100vh', overflow: 'scroll' }}>

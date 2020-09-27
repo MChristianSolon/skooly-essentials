@@ -9,19 +9,23 @@ h1 {
   float: left;
 }
 
+.titleName {
+  animation: vibrant;
+  animation: vibrant 2s infinite;
+}
 @keyframes vibrant {
   0% {
     color: #fbd786;
   }
   25% {
-    color: rgba(0, 252, 168, 0.658);
+    color: rgba(0, 181, 120, 0.658);
   }
 
   50% {
     color: rgba(0, 155, 245, 0.973);
   }
   75% {
-    color: #f8fa78;
+    color: #acae57;
   }
   100% {
     color: rgb(172, 70, 255);

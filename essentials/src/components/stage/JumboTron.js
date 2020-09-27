@@ -13,6 +13,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useParams } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import { db } from '../../Firebase/Firebase';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,14 +40,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JumboTron({ publisher, datePublish }) {
+export default function JumboTron({ publisher, datePublish, docId }) {
   const { url } = useParams();
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [pageTitle, setPageTitle] = React.useState('');
+  const [madeTitle, setMadeTitle] = React.useState(null);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleChange = (event) => {
+    setPageTitle(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    db.collection('videos').doc(docId).update({
+      title: pageTitle,
+    });
+  };
+
+  db.collection('videos')
+    .doc(`${docId}`)
+    .onSnapshot((doc) => {
+      if (doc.data()) {
+        console.log(doc.data().title);
+        setMadeTitle(doc.data().title);
+      }
+    });
 
   return (
     <Card className={classes.root}>
@@ -60,8 +85,22 @@ export default function JumboTron({ publisher, datePublish }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={publisher}
-        subheader={`Page created on: ${
+        title={
+          madeTitle ? (
+            <h3>{madeTitle}</h3>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <TextField
+                id="Title"
+                autoComplete="off"
+                label="Enter Title Here"
+                value={pageTitle}
+                onChange={handleChange}
+              ></TextField>
+            </form>
+          )
+        }
+        subheader={`Page Created By Charles on ${
           datePublish.time ? datePublish.time.toDate() : 'loading...'
         }`}
       />
@@ -94,41 +133,8 @@ export default function JumboTron({ publisher, datePublish }) {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        >
-          {/* <ExpandMoreIcon /> */}
-        </IconButton>
+        ></IconButton>
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is
-            absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved
-            shrimp and mussels, tucking them down into the rice, and cook again
-            without stirring, until mussels have opened and rice is just tender,
-            5 to 7 minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
-          </Typography>
-        </CardContent>
-      </Collapse> */}
     </Card>
   );
 }
