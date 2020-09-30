@@ -1,10 +1,9 @@
 .Log {
-  height: 90vh;
+  height: 100%;
 }
 
 .Log-Content {
   overflow-y: scroll;
-  height: 83vh;
 }
 
 .chat-field {

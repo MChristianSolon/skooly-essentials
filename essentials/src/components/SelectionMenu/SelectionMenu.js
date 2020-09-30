@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Gallery from './Gallery';
-import LineGallery from './LineGallery';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import ComputerMan from '../../images/ComputerMan.png';
 import './SelectionMenu.css';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +9,7 @@ import { db, timestamp } from '../../Firebase/Firebase';
 import { Redirect } from 'react-router-dom';
 import { SearchContext } from '../Contexts/SearchContext';
 import Grid from '@material-ui/core/Grid';
+import Segregation from './Segregation';
 
 function SelectionMenu() {
   const [code, setCode] = useState('');
@@ -133,86 +134,70 @@ function SelectionMenu() {
         className="SelectionMenu"
         style={displaySearch.length > 0 ? { display: 'none' } : {}}
       >
-        <div style={{ marginTop: '6vh' }}>
-          <div className="code-entry">
-            <h1 className="to-do">Join A Room</h1>
-            <h1 className="enter-code-here">Please Enter The Code</h1>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                error={validTarget}
-                helperText={validTarget ? 'No Such Code Exists.' : ''}
-                id="filled-basic"
-                label="CODE"
-                variant="filled"
+        <div className="code-entry">
+          <h1 className="to-do">Join A Room</h1>
+          <h1 className="enter-code-here">Just Enter A Code</h1>
+
+          <img src={ComputerMan} alt="ComputerMan" className="computer-man" />
+
+          <form onSubmit={handleSubmit} className="code-form">
+            <TextField
+              className="code-text-field"
+              error={validTarget}
+              helperText={validTarget ? 'No Such Code Exists.' : ''}
+              label={
+                <h1 style={{ margin: '0px', backgroundColor: 'transparent' }}>
+                  Enter the Code
+                </h1>
+              }
+              variant="outlined"
+              value={code}
+              onChange={handlChange}
+              autoComplete="off"
+            />
+          </form>
+        </div>
+        <hr></hr>
+        <div className="create-page">
+          <img
+            src={Heart}
+            alt="Heart"
+            style={{
+              position: 'absolute',
+              width: '35vw',
+            }}
+          />
+
+          <form onSubmit={createPage} className="create-page-form">
+            <h1 className="create-page-icon enter-code-here">
+              <NoteAddIcon
                 style={{
                   position: 'relative',
-                  top: '35vh',
-                  right: '28vw',
-                  width: '35vw',
-                  marginLeft: '15vw',
+                  top: '20px',
+                  width: '80px',
+                  height: '80px',
+                  color: 'white',
+                  marginRight: '20px',
                 }}
-                value={code}
-                onChange={handlChange}
-                autoComplete="off"
               />
-            </form>
-            <img
-              src={ComputerMan}
-              alt="ComputerMan"
-              style={{
-                width: '80vh',
-                position: 'absolute',
-                left: '45vw',
-                bottom: '145px',
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              height: '65vh',
-              backgroundColor: '#F8E9A1',
-              minWidth: '100vw',
-            }}
-          >
-            <img
-              src={Heart}
-              alt="Heart"
-              style={{
-                width: '35vw',
-                position: 'absolute',
-                left: '0px',
-              }}
-            />
-            <h1 style={{ margin: 'auto', position: 'relative', left: '35vw' }}>
               Create A Page
             </h1>
 
-            <form onSubmit={createPage}>
-              <h1 style={{ position: 'relative', left: '25vw', top: '15vh' }}>
-                {' '}
-                Enter Url
-              </h1>
-              <TextField
-                error={validCreate}
-                helperText={validCreate ? 'Invalid Url' : ''}
-                id="Url"
-                label="Enter Youtube Video Link Here"
-                variant="filled"
-                onChange={createChange}
-                autoComplete="off"
-                style={{
-                  position: 'relative',
-                  top: '35vh',
-                  width: '35vw',
-                  right: '3vw',
-                }}
-              />
-            </form>
-          </div>
+            <h1 className="create-url"> Enter Url</h1>
+            <TextField
+              error={validCreate}
+              helperText={validCreate ? 'Invalid Url' : ''}
+              className="code-text-field url-text-field"
+              label="Enter Youtube Video Link Here"
+              variant="filled"
+              onChange={createChange}
+              autoComplete="off"
+            />
+          </form>
         </div>
       </div>
-      <LineGallery />
+
+      <Segregation />
     </>
   );
 }

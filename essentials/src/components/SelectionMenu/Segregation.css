@@ -1,0 +1,42 @@
+#math {
+  position: relative;
+  background-color: #a8d0e6;
+  height: 150px;
+  width: 75%;
+  color: white;
+  padding: 20px;
+  animation: bar-enter2 1s;
+}
+
+#subject-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 20px;
+}
+
+#science {
+  position: relative;
+  left: 25%;
+  bottom: 20px;
+  background-color: #374785;
+  color: white;
+  height: 150px;
+  width: 75%;
+  padding: 20px;
+}
+
+#science h1 {
+  text-align: right;
+}
+
+#history {
+  position: relative;
+  left: 0px;
+  bottom: 20px;
+  background-color: #f76c6c;
+  color: white;
+  height: 150px;
+  width: 75%;
+  padding: 20px;
+}

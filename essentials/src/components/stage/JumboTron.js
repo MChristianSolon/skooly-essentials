@@ -11,10 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useParams } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { db } from '../../Firebase/Firebase';
+import BookmarkBorderRounded from '@material-ui/icons/BookmarkBorderRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +82,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <BookmarkBorderRounded />
           </IconButton>
         }
         title={
@@ -116,7 +116,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
           allowFullScreen
         ></iframe>
         <Typography variant="body2" color="textSecondary" component="p">
-          This a hot ass sun my boy
+          Enter Description Here
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

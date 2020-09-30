@@ -1,3 +1,25 @@
+.code {
+  position: relative;
+  bottom: 20px;
+  background-color: #f76c6c;
+  color: white;
+  height: 60px;
+  width: 100%;
+  padding: 20px;
+  animation: code-generate 2s;
+}
+
 .deleteButton:hover {
   color: rgb(206, 0, 0);
+}
+
+@keyframes code-generate {
+  0% {
+    width: 0%;
+    color: transparent;
+  }
+  100% {
+    width: 100%;
+    color: white;
+  }
 }

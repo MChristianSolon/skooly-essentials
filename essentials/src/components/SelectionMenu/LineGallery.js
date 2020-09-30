@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    height: '100vh',
+    height: '50vh',
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -64,7 +64,7 @@ export default function LineGallery() {
             key={tile.img}
           >
             <GridListTile key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
+              <img src={tile.img} alt={tile.title} style={{ height: '100%' }} />
               <GridListTileBar
                 title={tile.title}
                 classes={{

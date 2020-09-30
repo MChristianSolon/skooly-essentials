@@ -6,13 +6,108 @@ a {
 }
 h1 {
   font-size: 4vw;
-  float: left;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 }
 
 .titleName {
   animation: vibrant;
   animation: vibrant 2s infinite;
 }
+
+.code-form {
+  position: relative;
+  left: 35vw;
+  width: 100%;
+  height: 150px;
+}
+
+.code-text-field {
+  position: relative;
+
+  top: 20%;
+  width: 600px;
+}
+.code-text-field input {
+  height: 25vh;
+  font-size: 100px;
+}
+
+.code-entry {
+  position: relative;
+  height: 90vh;
+  margin-top: 15vh;
+  margin-left: 20vh;
+  margin-right: 20vh;
+}
+
+.enter-code-here {
+  position: relative;
+  background-color: #a8d0e6;
+  height: 150px;
+  width: 100%;
+  color: white;
+  padding: 20px;
+  animation: bar-enter2 1s;
+}
+
+.computer-man {
+  position: absolute;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  bottom: 0px;
+}
+
+.to-do {
+  position: relative;
+  left: 0px;
+  bottom: 20px;
+  background-color: #f76c6c;
+  color: white;
+  height: 150px;
+  width: 75%;
+  padding: 20px;
+  animation: bar-enter 2s;
+}
+
+.create-page {
+  height: 65vh;
+  padding: 20px;
+}
+.create-page-icon {
+  background-color: #374785;
+  height: 150px;
+  width: 40%;
+}
+.create-page-form {
+  position: relative;
+  left: 50%;
+}
+
+.create-url {
+  position: relative;
+  left: 0px;
+  bottom: 20px;
+  background-color: #f76c6c;
+  color: white;
+  height: 150px;
+  width: 25%;
+  padding: 20px;
+}
+
+.url-text-field input {
+  height: 20px;
+  font-size: 16px;
+}
+
+/* YELLOW: #f8e9a1
+RED: #f76c6c
+BLUE: #A8d0e6
+blue2: #374785
+blue3: #24305e */
+.segregation {
+  color: white;
+}
+
 @keyframes vibrant {
   0% {
     color: #fbd786;
@@ -32,18 +127,36 @@ h1 {
   }
 }
 
-.code-entry {
-  height: 80vh;
+@keyframes bar-enter {
+  0% {
+    width: 0%;
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  75% {
+    color: transparent;
+  }
+  100% {
+    width: 75%;
+    color: white;
+  }
 }
 
-.enter-code-here {
-  position: absolute;
-  top: 23vh;
-  left: 8vw;
-}
-
-.to-do {
-  position: relative;
-  left: 35vw;
-  bottom: 20px;
+@keyframes bar-enter2 {
+  0% {
+    width: 0%;
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  75% {
+    color: transparent;
+  }
+  100% {
+    width: 100%;
+    color: white;
+  }
 }

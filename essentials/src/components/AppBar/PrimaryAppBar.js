@@ -23,11 +23,8 @@ const useStyles = makeStyles((theme) => ({
     height: '5vh',
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
     maxHeight: '70px',
+    backgroundColor: 'white',
   },
   search: {
     position: 'relative',
@@ -105,6 +102,7 @@ export default function PersistentDrawerLeft() {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={{ color: 'black' }}
       >
         <Toolbar>
           <IconButton
@@ -131,7 +129,10 @@ export default function PersistentDrawerLeft() {
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>{currentUser}</MenuItem>
+            <Link to="/profile">
+              <MenuItem onClick={handleClose}>{currentUser}</MenuItem>
+            </Link>
+
             <MenuItem onClick={handleLogOut}>Log-Out</MenuItem>
           </Menu>
           <div className={classes.search}>
@@ -144,6 +145,7 @@ export default function PersistentDrawerLeft() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              style={{ color: 'black' }}
               inputProps={{ 'aria-label': 'search' }}
               value={search}
               onChange={handleSearchText}

@@ -58,7 +58,7 @@ function Stage() {
   }
   return (
     <div>
-      <h2 style={{ textAlign: 'right' }}>
+      <h2 style={{ textAlign: 'right' }} className="code">
         code: <b>{code}</b>
       </h2>
       <Grid container>

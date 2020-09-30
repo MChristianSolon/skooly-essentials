@@ -33,7 +33,7 @@ function Log({ url }) {
       });
   }, [currentUser, user, url]);
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <Card className="Log" variant="elevation">
         <CardContent className="Log-Content" style={{ height: '92%' }}>
           {messages}

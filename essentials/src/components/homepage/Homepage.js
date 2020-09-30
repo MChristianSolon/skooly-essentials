@@ -13,7 +13,9 @@ function Homepage() {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
+      //temporary Local Storage Solution
       localStorage.setItem('currentUser', user.displayName);
+      localStorage.setItem('photoUrl', auth.currentUser.photoURL);
       setCurrentUser(user.displayName);
     } else {
       setCurrentUser(null);
