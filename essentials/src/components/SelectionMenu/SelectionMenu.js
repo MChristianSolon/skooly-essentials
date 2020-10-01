@@ -74,7 +74,7 @@ function SelectionMenu() {
       .get()
       .then((snap) => {
         snap.docs.forEach((doc) => {
-          if (doc.data().code === code) {
+          if (doc.data().code === parseInt(code)) {
             setTarget(doc.data());
           }
         });
