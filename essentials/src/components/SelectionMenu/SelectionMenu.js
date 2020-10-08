@@ -90,7 +90,6 @@ function SelectionMenu() {
   //Page Creation
   function createPage(event) {
     event.preventDefault();
-    console.log(create.split('v=')[1]);
     if (create.split('v=')[1]) {
       db.collection('videos').add({
         publisher: localStorage.getItem('currentUser'),

@@ -51,8 +51,8 @@ export default function LineGallery() {
           };
         })
       );
+      getGallery();
     });
-    return getGallery;
   }, []);
 
   return (

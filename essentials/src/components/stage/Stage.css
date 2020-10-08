@@ -1,9 +1,8 @@
 .code {
   position: relative;
-  bottom: 20px;
   background-color: #f76c6c;
   color: white;
-  height: 60px;
+  height: 50%;
   width: 100%;
   padding: 20px;
   animation: code-generate 2s;
@@ -22,4 +21,12 @@
     width: 100%;
     color: white;
   }
+}
+
+.JumboTron-play-list {
+  float: right;
+}
+
+.Jumbo-new-url {
+  position: relative;
 }
