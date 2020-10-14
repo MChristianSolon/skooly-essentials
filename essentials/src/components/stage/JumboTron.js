@@ -129,24 +129,6 @@ export default function JumboTron({ publisher, datePublish, docId }) {
 
   const handleSave = () => {
     const docRef = db.collection('users').doc(`${auth.currentUser.email}`);
-    // docRef.get().then(function(doc) {
-    //   if(doc.exists){
-    //     let prevArray = [];
-    //     console.log('userUPdated')
-    //     db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
-    //       prevArray = doc.data().saved
-    //       prevArray.push(`${user}__${url}`)
-    //     })
-    //     db.collection('users').doc(`${auth.currentUser.email}`).update({
-    //       saved: prevArray
-    //     })
-    //   }else{
-    //     console.log("USERCREATED")
-    //     db.collection('users').doc(`${auth.currentUser.email}`).set({
-    //       saved: [`${user}__${url}`]
-    //     },{merge: true})
-    //   }
-    // })
     docRef.update({
       saved: firebase.firestore.FieldValue.arrayUnion(`${user}__${url}`)
     }).catch(() => {
@@ -157,8 +139,6 @@ export default function JumboTron({ publisher, datePublish, docId }) {
             },{merge: true})
          
     })
-   
-
   }
 
   return (

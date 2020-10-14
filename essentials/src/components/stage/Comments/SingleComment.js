@@ -56,7 +56,7 @@ function SingleComment({
     let newComments = []
     if(subComments){
       subComments.forEach(subCom => {
-        if(subCom.id == id){
+        if(subCom.id === id){
           newComments.push(
             <SubCom
                       user={subCom.user}
@@ -69,7 +69,7 @@ function SingleComment({
       })
     }
     setSubComArray(newComments)
-  }, [subComments]);
+  }, [subComments, id]);
 
   return (
     <ListItem>

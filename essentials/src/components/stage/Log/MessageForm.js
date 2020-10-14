@@ -4,7 +4,6 @@ import { db } from '../../../Firebase/Firebase';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Send from '@material-ui/icons/Send';
 import './MessageCard.css';
-import { useParams } from 'react-router-dom';
 
 function MessageForm({ currentUser, url, dID }) {
   const [message, setMessage] = useState('');
