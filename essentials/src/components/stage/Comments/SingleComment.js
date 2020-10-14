@@ -12,17 +12,16 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { db } from '../../../Firebase/Firebase';
 import { IconButton } from '@material-ui/core';
 import SubCom from './SubCom';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from 'firebase'
 
 function SingleComment({
   comment,
   user,
   time,
   id,
-  url,
-  publisher,
+  comments,
   subComments,
+  dID,
 }) {
   const [subComArray, setSubComArray] = useState([]);
   const [reply, setReply] = useState('');
@@ -32,41 +31,46 @@ function SingleComment({
   }
 
   function handleDelete() {
-    db.collection(`comments:${publisher}:${url}`)
-      .doc(`${id}`)
-      .delete()
-      .then(() => {
-        console.log('deleted');
-      });
+    let newCom = comments.filter(item => {
+      return item.newID !== id
+    })
+    db.collection('videos').doc(`${dID}`).update({
+      comments: newCom
+    })
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    db.collection(`comments:${publisher}:${url}`)
-      .doc(`${id}`)
-      .update({
-        SubComments: firebase.firestore.FieldValue.arrayUnion({
-          comment: reply,
-          user: localStorage.getItem('currentUser'),
-        }),
+    db.collection('videos').doc(`${dID}`).update({
+      subComments: firebase.firestore.FieldValue.arrayUnion({
+        reply,
+        id,
+        user: localStorage.getItem("currentUser")
       })
-      .then(() => setReply(''));
+    })
+    setReply("")
   }
+
+
   useEffect(() => {
-    if (subComments) {
-      setSubComArray(
-        subComments.map((com) => {
-          return (
+    let newComments = []
+    if(subComments){
+      subComments.forEach(subCom => {
+        if(subCom.id == id){
+          newComments.push(
             <SubCom
-              user={com.user}
-              comment={com.comment}
-              key={(com, com.SubComment, Math.random())}
-            />
-          );
-        })
-      );
+                      user={subCom.user}
+                      comment={subCom.reply}
+                      key={Math.random() * 12}
+                      id
+                    />
+          )
+        }
+      })
     }
+    setSubComArray(newComments)
   }, [subComments]);
+
   return (
     <ListItem>
       <ListItemAvatar>

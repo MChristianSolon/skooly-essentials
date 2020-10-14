@@ -59,7 +59,7 @@ function Stage() {
   return (
     <div>
       <h2 style={{ textAlign: 'right' }} className="code">
-        code: <b>{code}</b>
+        code: <b>{code}</b> 
       </h2>
       <Grid container>
         <Grid item xs={7}>
@@ -71,7 +71,7 @@ function Stage() {
           />
         </Grid>
         <Grid item xs={5}>
-          <Log url={url} />
+          <Log url={url} dID={documentId}/>
         </Grid>
         <Grid item xs={7}>
           <form onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ function Stage() {
           <RelatedLink pageId={pageId} />
         </Grid>
         <Grid item xs={5}>
-          <Comments url={url} publisher={user} />
+          <Comments url={url} publisher={user} dID={documentId} />
         </Grid>
       </Grid>
     </div>

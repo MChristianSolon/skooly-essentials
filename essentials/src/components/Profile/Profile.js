@@ -8,7 +8,7 @@ function Profile() {
 
   useEffect(() => {
     db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
-        if(doc.exists) {
+        if(doc.data().saved) {
             console.log(doc.data().saved)
             setSavedVideos(doc.data().saved)
         }

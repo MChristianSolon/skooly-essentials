@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { db, timestamp } from '../../../Firebase/Firebase';
+import { db } from '../../../Firebase/Firebase';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-function CommentForm({ url, publisher }) {
+function CommentForm({ url, publisher, dID }) {
   const [comment, setComment] = useState('');
   const [load, setLoad] = useState('none');
 
@@ -13,16 +13,33 @@ function CommentForm({ url, publisher }) {
   function handleSubmit(event) {
     setLoad('');
     event.preventDefault();
-    db.collection(`comments:${publisher}:${url}`)
-      .add({
-        user: localStorage.getItem('currentUser'),
-        comment,
-        time: timestamp(),
-      })
-      .then(() => {
+    let currentComments = []
+    db.collection('videos').doc(`${dID}`).get().then(item => {
+        currentComments = item.data().comments
+    }).then(() => {
+      if(currentComments){
+        currentComments.push({
+          user: localStorage.getItem('currentUser'),
+          comment,
+          time: new Date(),
+          newID: Math.random()
+        })
+        db.collection('videos').doc(`${dID}`).update({
+          comments: currentComments
+        })
+      }else{
+        db.collection('videos').doc(`${dID}`).update({
+          comments: [{
+            user: localStorage.getItem('currentUser'),
+            comment,
+            time: new Date(),
+            newID: Math.random()
+          }]
+        })
+      }
+    })
         setComment('');
         setLoad('none');
-      });
   }
   return (
     <div>

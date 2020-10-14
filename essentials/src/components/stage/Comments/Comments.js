@@ -14,44 +14,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Comments({ url, publisher }) {
+export default function Comments({ url, publisher,dID }) {
   const classes = useStyles();
   const [comments, setComments] = useState([]);
-
-  //getting comments
   useEffect(() => {
-    db.collection(`comments:${publisher}:${url}`)
-      .orderBy('time')
-      .onSnapshot((snap) => {
-        setComments(
-          snap.docs.map((doc) => {
-            return (
-              <SingleComment
-                key={doc.id}
-                id={doc.id}
-                user={doc.data().user}
-                comment={doc.data().comment}
+    db.collection('videos').doc(`${dID}`).onSnapshot(videos => {
+      let vids = videos.data()
+      if(vids){
+        if(vids.comments){
+          setComments(
+            vids.comments.map(comment => {
+              return(
+                <SingleComment
+                key={comment.newID}
+                id={comment.newID}
+                user={comment.user}
+                comment={comment.comment}
                 time={
-                  doc.data().time
-                    ? doc.data().time.toDate().toString()
+                  comment.time
+                    ? comment.time.toString()
                     : 'loading...'
                 }
                 publisher={publisher}
                 url={url}
-                subComments={doc.data().SubComments}
+                subComments={vids.subComments}
+                dID={dID}
+                comments={vids.comments}
               />
-            );
-          })
-        );
-      });
-  }, [publisher, url]);
+              )   
+            }) 
+          )
+
+        }
+ 
+      }
+     
+    })
+
+  },[dID, publisher, url])
 
   return (
     <Card style={{ height: '100vh', overflow: 'scroll' }}>
       <CardContent>
-        <CommentForm url={url} publisher={publisher} />
+        <CommentForm url={url} publisher={publisher} dID={dID} />
         <List className={classes.root} style={{ margin: '0px auto' }}>
-          {comments}
+         {comments}
         </List>
       </CardContent>
     </Card>

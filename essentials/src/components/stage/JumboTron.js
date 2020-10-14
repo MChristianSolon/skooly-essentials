@@ -12,6 +12,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import { useParams } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { db, auth } from '../../Firebase/Firebase';
+import firebase from 'firebase'
 import BookmarkBorderRounded from '@material-ui/icons/BookmarkBorderRounded';
 import JumboGallery from './JumboGallery';
 import AddToQueueIcon from '@material-ui/icons/AddToQueue';
@@ -128,25 +129,33 @@ export default function JumboTron({ publisher, datePublish, docId }) {
 
   const handleSave = () => {
     const docRef = db.collection('users').doc(`${auth.currentUser.email}`);
-    docRef.get().then(function(doc) {
-      if(doc.exists){
-        let prevData; 
-        let prevArray;
-        console.log('userUPdated')
-        db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
-          
-          prevData = doc.data().saved
-          prevArray.push('test2')
-        })
-        db.collection('users').doc(`${auth.currentUser.email}`).update({
-          saved: prevArray
-        })
-      }else{
-        console.log("USERCREATED")
-        db.collection('users').doc(`${auth.currentUser.email}`).set({
-          saved: [`${user}__${url}`]
-        },{merge: true})
-      }
+    // docRef.get().then(function(doc) {
+    //   if(doc.exists){
+    //     let prevArray = [];
+    //     console.log('userUPdated')
+    //     db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
+    //       prevArray = doc.data().saved
+    //       prevArray.push(`${user}__${url}`)
+    //     })
+    //     db.collection('users').doc(`${auth.currentUser.email}`).update({
+    //       saved: prevArray
+    //     })
+    //   }else{
+    //     console.log("USERCREATED")
+    //     db.collection('users').doc(`${auth.currentUser.email}`).set({
+    //       saved: [`${user}__${url}`]
+    //     },{merge: true})
+    //   }
+    // })
+    docRef.update({
+      saved: firebase.firestore.FieldValue.arrayUnion(`${user}__${url}`)
+    }).catch(() => {
+      
+            console.log("USERCREATED")
+            db.collection('users').doc(`${auth.currentUser.email}`).set({
+              saved: [`${user}__${url}`]
+            },{merge: true})
+         
     })
    
 
