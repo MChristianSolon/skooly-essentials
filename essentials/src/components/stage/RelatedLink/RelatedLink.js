@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../Firebase/Firebase';
+import "./RelatedLink.css"
 
 function RelatedLink({ pageId }) {
   const [currentRelatedLink, setCurrentRelatedLink] = useState(null);
@@ -24,7 +25,9 @@ function RelatedLink({ pageId }) {
           style={{ width: '100%', height: '100vh' }}
         />
       ) : (
-        <h2>Loading...</h2>
+        <div className="relatedLink__link">
+        <h1 className="relatedLink__text">Files</h1>
+        </div>
       )}
     </div>
   );

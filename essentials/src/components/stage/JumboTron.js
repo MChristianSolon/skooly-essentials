@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import { useParams } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import { db } from '../../Firebase/Firebase';
+import { db, auth } from '../../Firebase/Firebase';
 import BookmarkBorderRounded from '@material-ui/icons/BookmarkBorderRounded';
 import JumboGallery from './JumboGallery';
 import AddToQueueIcon from '@material-ui/icons/AddToQueue';
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function JumboTron({ publisher, datePublish, docId }) {
-  const { url } = useParams();
+  const { url, user} = useParams();
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [pageTitle, setPageTitle] = React.useState('');
@@ -53,7 +53,11 @@ export default function JumboTron({ publisher, datePublish, docId }) {
   const [add, setAdd] = React.useState(null);
   const [addUrl, setAddUrl] = React.useState('');
   const [links, setLinks] = React.useState([]);
+  const [currentVideo, setCurrentVideo] = React.useState("")
 
+  useEffect(() => {
+    setCurrentVideo(url)
+  },[url])
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -122,6 +126,32 @@ export default function JumboTron({ publisher, datePublish, docId }) {
     }
   };
 
+  const handleSave = () => {
+    const docRef = db.collection('users').doc(`${auth.currentUser.email}`);
+    docRef.get().then(function(doc) {
+      if(doc.exists){
+        let prevData; 
+        let prevArray;
+        console.log('userUPdated')
+        db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
+          
+          prevData = doc.data().saved
+          prevArray.push('test2')
+        })
+        db.collection('users').doc(`${auth.currentUser.email}`).update({
+          saved: prevArray
+        })
+      }else{
+        console.log("USERCREATED")
+        db.collection('users').doc(`${auth.currentUser.email}`).set({
+          saved: [`${user}__${url}`]
+        },{merge: true})
+      }
+    })
+   
+
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -149,7 +179,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
             <IconButton aria-label="settings" onClick={handleAdd}>
               <AddToQueueIcon />
             </IconButton>
-            <IconButton aria-label="settings">
+            <IconButton aria-label="settings" onClick={handleSave}>
               <BookmarkBorderRounded />
             </IconButton>
           </div>
@@ -181,7 +211,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
           title={url}
           width="100%"
           height="650px"
-          src={`https://www.youtube.com/embed/${url}`}
+          src={`https://www.youtube.com/embed/${currentVideo}`}
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -207,7 +237,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
         </IconButton>
         <div className="JumboTron-play-list">
           <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <JumboGallery links={links} publisher={publisher} />
+            <JumboGallery links={links} publisher={publisher} setCurrentVideo={setCurrentVideo}/>
           </Collapse>
         </div>
       </CardActions>

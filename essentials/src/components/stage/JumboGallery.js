@@ -4,6 +4,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -28,21 +29,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JumboGallery({ links, publisher }) {
+export default function JumboGallery({ links, publisher, setCurrentVideo }) {
   const classes = useStyles();
   const tileData = links.map((link) => {
     return {
       img: `http://i3.ytimg.com/vi/${link}/maxresdefault.jpg`,
       title: publisher,
       author: 'me',
+      link
     };
   });
+
+  const handleClick = (url) => {
+   setCurrentVideo(url)
+  }
 
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
         {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
+          <GridListTile key={tile.img} onClick={() => handleClick(tile.link)} className="jumboGallery__tile">
             <img
               src={tile.img}
               alt={tile.title}

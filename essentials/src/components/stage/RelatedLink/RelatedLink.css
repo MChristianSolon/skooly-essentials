@@ -1,0 +1,30 @@
+.relatedLink__link {
+  text-align: center;
+  background-color: rgb(250, 116, 116);
+  animation-name: bar-enter;
+  color: white;
+  animation-duration: 2s;
+}
+
+.relatedLink__text {
+  animation: fade;
+  animation-duration: 3s;
+}
+
+@keyframes bar-enter {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fade {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
+}

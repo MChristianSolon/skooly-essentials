@@ -30,3 +30,23 @@
 .Jumbo-new-url {
   position: relative;
 }
+
+.jumboGallery__tile:hover {
+  border: 5px solid #f76c6c;
+  animation-name: Rainbow;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  cursor: pointer;
+}
+
+@keyframes Rainbow {
+  0% {
+    border-color: rgb(253, 117, 117);
+  }
+  50% {
+    border-color: rgb(90, 90, 252);
+  }
+  100% {
+    border-color: yellow;
+  }
+}
