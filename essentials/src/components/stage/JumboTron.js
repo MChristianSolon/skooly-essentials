@@ -96,7 +96,19 @@ export default function JumboTron({ publisher, datePublish, docId }) {
           }
         }
       });
-  }, [docId]);
+
+ db.collection("users").doc(`${auth.currentUser.email}`).get().then((item) => {
+  item.data().likedVideos.map(item => {
+    if(item.split(':')[0] === url && item.split(':')[1] === user){
+      setLiked(true)
+    }
+  })
+
+ })
+
+
+  
+  }, [docId, url, user]);
 
   const handleHeart = () => {
     setLiked(true);
@@ -105,6 +117,9 @@ export default function JumboTron({ publisher, datePublish, docId }) {
       .update({
         likes: likes + 1,
       });
+      db.collection('users').doc(`${auth.currentUser.email}`).update({
+        likedVideos : firebase.firestore.FieldValue.arrayUnion(`${url}:${user}`)
+      })
   };
 
   const handleNewUrl = (event) => {
