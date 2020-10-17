@@ -8,6 +8,7 @@ import { UserContext } from './components/Contexts/UserContext';
 import { SearchContext } from './components/Contexts/SearchContext';
 import PrimaryAppBar from './components/AppBar/PrimaryAppBar';
 import Profile from './components/Profile/Profile';
+
 import './App.css';
 
 function App() {
