@@ -97,7 +97,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
         }
       });
 
- db.collection("users").doc(`${auth.currentUser.email}`).get().then((item) => {
+ db.collection("users").doc(`${localStorage.getItem("email")}`).get().then((item) => {
    if(item.data()){
     item.data().likedVideos.map(item => {
       if(item.split(':')[0] === url && item.split(':')[1] === user){

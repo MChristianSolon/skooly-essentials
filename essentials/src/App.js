@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Homepage from './components/homepage/Homepage';
 import Stage from './components/stage/stage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import TeacherMenu from './components/TeacherMenu/TeacherMenu';
 import StudentMenu from './components/StudentMenu/StudentMenu';
 import { UserContext } from './components/Contexts/UserContext';
