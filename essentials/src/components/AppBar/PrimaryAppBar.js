@@ -72,6 +72,7 @@ export default function PersistentDrawerLeft() {
   const open = Boolean(anchorEl);
   const { search, setSearch } = useContext(SearchContext);
 
+
   function handleLogOut() {
     setAnchorEl(null);
     localStorage.clear();
@@ -90,6 +91,8 @@ export default function PersistentDrawerLeft() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
 
   return (
     <div
@@ -129,7 +132,7 @@ export default function PersistentDrawerLeft() {
             open={open}
             onClose={handleClose}
           >
-            <Link to="/profile">
+            <Link to={`/profile/${localStorage.getItem("currentUser")}/${localStorage.getItem("email")}`}>
               <MenuItem onClick={handleClose}>{currentUser}</MenuItem>
             </Link>
 

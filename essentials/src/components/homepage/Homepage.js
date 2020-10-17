@@ -16,6 +16,7 @@ function Homepage() {
       //temporary Local Storage Solution
       localStorage.setItem('currentUser', user.displayName);
       localStorage.setItem('photoUrl', auth.currentUser.photoURL);
+      localStorage.setItem("email", auth.currentUser.email)
       setCurrentUser(user.displayName);
     } else {
       setCurrentUser(null);

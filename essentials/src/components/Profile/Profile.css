@@ -5,6 +5,7 @@
   border-radius: 50%;
   margin: auto;
   display: block;
+  height: 200px;
 }
 
 .profile-name {
@@ -17,4 +18,9 @@
 
 .savedVideo {
   text-align: center;
+}
+
+.profile-videos {
+  margin: 200px;
+  margin-top: 0px;
 }

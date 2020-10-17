@@ -98,11 +98,15 @@ export default function JumboTron({ publisher, datePublish, docId }) {
       });
 
  db.collection("users").doc(`${auth.currentUser.email}`).get().then((item) => {
-  item.data().likedVideos.map(item => {
-    if(item.split(':')[0] === url && item.split(':')[1] === user){
-      setLiked(true)
-    }
-  })
+   if(item.data()){
+    item.data().likedVideos.map(item => {
+      if(item.split(':')[0] === url && item.split(':')[1] === user){
+        setLiked(true)
+      }
+      return null; 
+    })
+   }
+
 
  })
 
@@ -117,9 +121,19 @@ export default function JumboTron({ publisher, datePublish, docId }) {
       .update({
         likes: likes + 1,
       });
-      db.collection('users').doc(`${auth.currentUser.email}`).update({
-        likedVideos : firebase.firestore.FieldValue.arrayUnion(`${url}:${user}`)
+
+      db.collection('users').doc(`${auth.currentUser.email}`).get().then((item) => {
+        if(item.exists){
+          db.collection('users').doc(`${auth.currentUser.email}`).update({
+            likedVideos : firebase.firestore.FieldValue.arrayUnion(`${url}:${user}`)
+          })
+        }else{
+          db.collection('users').doc(`${auth.currentUser.email}`).set({
+            likedVideos: [`${url}:${user}`]
+          },{merge: true})
+        }
       })
+   
   };
 
   const handleNewUrl = (event) => {
@@ -147,8 +161,6 @@ export default function JumboTron({ publisher, datePublish, docId }) {
     docRef.update({
       saved: firebase.firestore.FieldValue.arrayUnion(`${user}__${url}`)
     }).catch(() => {
-      
-            console.log("USERCREATED")
             db.collection('users').doc(`${auth.currentUser.email}`).set({
               saved: [`${user}__${url}`]
             },{merge: true})
@@ -205,7 +217,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
             </form>
           )
         }
-        subheader={`Page Created By Charles on ${
+        subheader={`Page Created By ${user} on ${
           datePublish.time ? datePublish.time.toDate() : 'loading...'
         }`}
       />

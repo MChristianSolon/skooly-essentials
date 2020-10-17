@@ -96,6 +96,7 @@ function SelectionMenu() {
         videoUrl: `${create.split('v=')[1].split('&')[0]}`,
         code: Math.floor(Math.random() * 10000),
         time: timestamp(),
+        likes: 0
       });
       setGoCreate(true);
     } else {

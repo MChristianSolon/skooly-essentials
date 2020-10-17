@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import SavedVideo from './SavedVideo'
-import {db, auth} from '../../Firebase/Firebase'
+import {db} from '../../Firebase/Firebase'
+import {useParams} from 'react-router-dom'
 import './Profile.css';
 function Profile() {
   const [savedVideos, setSavedVideos] = useState([])
+  const {user, email} = useParams()
 
   useEffect(() => {
-    db.collection('users').doc(`${auth.currentUser.email}`).get().then(doc => {
+    db.collection('users').doc(`${email}`).get().then(doc => {
+      if(doc.data()){
         if(doc.data().saved) {
-            console.log(doc.data().saved)
-            setSavedVideos(doc.data().saved)
-        }
-    })
+          setSavedVideos(doc.data().saved)
+      }
+      }
+    
+    },[])
    
-},[])
+},[email])
   return (
     <Grid container className="profile-page">
       <Grid item md={4}>
@@ -23,12 +27,17 @@ function Profile() {
           alt="ProfilePhoto"
           className="profile-photo"
         />
-        <h3 className="profile-name">{localStorage.getItem('currentUser')}</h3>
+        <h3 className="profile-name">{user}</h3>
       </Grid>
       <Grid item md={8}>
-      <h1 className="profile-savedPages">Saved Pages</h1>
-      {savedVideos.map((video) => (<SavedVideo data={video}/>))}
+      {/* <h1 className="profile-savedPages">Saved Pages</h1> */}
       </Grid>
+      <Grid item md={12}>
+      <div className="profile-videos">
+      {savedVideos.map((video) => (<SavedVideo key={video.saved} data={video}/>))}
+      </div>
+      </Grid>
+      
     </Grid>
   );
 }

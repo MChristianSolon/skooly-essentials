@@ -4,7 +4,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { db } from '../../Firebase/Firebase';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ export default function LineGallery() {
   ]);
 
   useEffect(() => {
-    let getGallery = db.collection('videos').onSnapshot((snap) => {
+    let getGallery = db.collection('videos').orderBy('likes').onSnapshot((snap) => {
       setTileData(
         snap.docs.map((doc) => {
           return {
@@ -48,8 +48,9 @@ export default function LineGallery() {
             author: doc.data().publisher,
             title: doc.data().publisher,
             url: doc.data().videoUrl,
+            likes: doc.data().likes
           };
-        })
+        }).reverse()
       );
       getGallery();
     });
@@ -74,7 +75,10 @@ export default function LineGallery() {
                 }}
                 actionIcon={
                   <IconButton aria-label={`star ${tile.title}`}>
-                    <StarBorderIcon className={classes.title} />
+                   <h2  style={{color: 'white'}}>
+                   {tile.likes}
+                     </h2><br></br>
+                    <FavoriteIcon className={classes.title}  style={{color: 'red'}}/>
                   </IconButton>
                 }
               />

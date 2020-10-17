@@ -32,7 +32,7 @@ function App() {
             <Switch>
               <Route path="/teacher/:user" component={TeacherMenu} />
               <Route path="/student" component={StudentMenu} />
-              <Route path="/profile" children={<Profile />} />
+              <Route path="/profile/:user/:email" children={<Profile />} />
               <Route path="/stage/:user/:url" children={<Stage />} />
             </Switch>
           </SearchContext.Provider>
