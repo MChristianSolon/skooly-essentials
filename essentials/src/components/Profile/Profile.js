@@ -6,13 +6,16 @@ import {useParams} from 'react-router-dom'
 import './Profile.css';
 function Profile() {
   const [savedVideos, setSavedVideos] = useState([])
-  const {user, email} = useParams()
+  const [profilePhoto, setProfilePhoto] = useState('')
+  const {user, email} = useParams() 
 
   useEffect(() => {
     db.collection('users').doc(`${email}`).get().then(doc => {
       if(doc.data()){
         if(doc.data().saved) {
-          setSavedVideos(doc.data().saved)
+          setSavedVideos(doc.data().saved)     
+      }if(doc.data().profilePicture){
+        setProfilePhoto(doc.data().profilePicture)
       }
       }
     
@@ -23,7 +26,7 @@ function Profile() {
     <Grid container className="profile-page">
       <Grid item md={4}>
         <img
-          src={localStorage.getItem('photoUrl')}
+          src={profilePhoto ? profilePhoto : "https://picsum.photos/200/300"}
           alt="ProfilePhoto"
           className="profile-photo"
         />

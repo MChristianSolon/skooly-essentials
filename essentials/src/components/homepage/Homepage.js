@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { auth } from '../../Firebase/Firebase';
+import { auth, db } from '../../Firebase/Firebase';
 import { uiConfig } from '../../Firebase/Firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Background from './Background';
@@ -17,6 +17,17 @@ function Homepage() {
       localStorage.setItem('currentUser', user.displayName);
       localStorage.setItem('photoUrl', auth.currentUser.photoURL);
       localStorage.setItem("email", auth.currentUser.email)
+      db.collection('users').doc(`${auth.currentUser.email}`).get().then(item => {
+        if(item.exists){
+          db.collection('users').doc(`${auth.currentUser.email}`).update({
+            profilePicture: auth.currentUser.photoURL
+          })
+        }else{
+          db.collection('users').doc(`${auth.currentUser.email}`).set({
+            profilePicture: auth.currentUser.photoURL
+          })
+        }
+      })
       setCurrentUser(user.displayName);
     } else {
       setCurrentUser(null);

@@ -12,6 +12,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import { useParams } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { db, auth } from '../../Firebase/Firebase';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import firebase from 'firebase'
 import BookmarkBorderRounded from '@material-ui/icons/BookmarkBorderRounded';
 import JumboGallery from './JumboGallery';
@@ -54,7 +55,8 @@ export default function JumboTron({ publisher, datePublish, docId }) {
   const [add, setAdd] = React.useState(null);
   const [addUrl, setAddUrl] = React.useState('');
   const [links, setLinks] = React.useState([]);
-  const [currentVideo, setCurrentVideo] = React.useState("")
+  const [currentVideo, setCurrentVideo] = React.useState("");
+  const [saved, setSaved] = React.useState(false)
 
   useEffect(() => {
     setCurrentVideo(url)
@@ -103,11 +105,22 @@ export default function JumboTron({ publisher, datePublish, docId }) {
       if(item.split(':')[0] === url && item.split(':')[1] === user){
         setLiked(true)
       }
-      return null; 
+  
+      return 0; 
     })
+    item.data().saved.map(item => {
+      if(item.split('__')[1] === url && item.split('__')[0] === user) {
+      
+        setSaved(true)
+      }
+  
+      return 0; 
+    })
+   
+    
    }
 
-
+  
  })
 
 
@@ -115,25 +128,35 @@ export default function JumboTron({ publisher, datePublish, docId }) {
   }, [docId, url, user]);
 
   const handleHeart = () => {
-    setLiked(true);
-    db.collection('videos')
+    if(liked){
+      db.collection('users').doc(`${auth.currentUser.email}`).update({
+        likedVideos: firebase.firestore.FieldValue.arrayRemove(`${url}:${user}`)
+      })
+      db.collection('videos')
       .doc(`${docId}`)
       .update({
-        likes: likes + 1,
-      });
-
-      db.collection('users').doc(`${auth.currentUser.email}`).get().then((item) => {
-        if(item.exists){
-          db.collection('users').doc(`${auth.currentUser.email}`).update({
-            likedVideos : firebase.firestore.FieldValue.arrayUnion(`${url}:${user}`)
-          })
-        }else{
-          db.collection('users').doc(`${auth.currentUser.email}`).set({
-            likedVideos: [`${url}:${user}`]
-          },{merge: true})
-        }
-      })
-   
+        likes: likes - 1,
+      }).then(() => setLiked(false))
+    }else{
+      setLiked(true);
+      db.collection('videos')
+        .doc(`${docId}`)
+        .update({
+          likes: likes + 1,
+        });
+  
+        db.collection('users').doc(`${auth.currentUser.email}`).get().then((item) => {
+          if(item.exists){
+            db.collection('users').doc(`${auth.currentUser.email}`).update({
+              likedVideos : firebase.firestore.FieldValue.arrayUnion(`${url}:${user}`)
+            })
+          }else{
+            db.collection('users').doc(`${auth.currentUser.email}`).set({
+              likedVideos: [`${url}:${user}`]
+            },{merge: true})
+          }
+        })
+    }
   };
 
   const handleNewUrl = (event) => {
@@ -158,14 +181,22 @@ export default function JumboTron({ publisher, datePublish, docId }) {
 
   const handleSave = () => {
     const docRef = db.collection('users').doc(`${auth.currentUser.email}`);
-    docRef.update({
-      saved: firebase.firestore.FieldValue.arrayUnion(`${user}__${url}`)
-    }).catch(() => {
-            db.collection('users').doc(`${auth.currentUser.email}`).set({
-              saved: [`${user}__${url}`]
-            },{merge: true})
-         
-    })
+    if(saved){
+      docRef.update({
+        saved: firebase.firestore.FieldValue.arrayRemove(`${user}__${url}`)
+      }).then(() => setSaved(false))
+    }else{
+      docRef.update({
+        saved: firebase.firestore.FieldValue.arrayUnion(`${user}__${url}`)
+      }).catch(() => {
+              db.collection('users').doc(`${auth.currentUser.email}`).set({
+                saved: [`${user}__${url}`]
+              },{merge: true})
+           
+      }).then(() => {
+        setSaved(true)
+      })
+    }
   }
 
   return (
@@ -196,7 +227,7 @@ export default function JumboTron({ publisher, datePublish, docId }) {
               <AddToQueueIcon />
             </IconButton>
             <IconButton aria-label="settings" onClick={handleSave}>
-              <BookmarkBorderRounded />
+              {saved ? <BookmarkIcon  style={saved ? {color: 'red'} : {}}/> : <BookmarkBorderRounded />}
             </IconButton>
           </div>
         }
@@ -237,7 +268,6 @@ export default function JumboTron({ publisher, datePublish, docId }) {
         <IconButton
           aria-label="add to favorites"
           onClick={handleHeart}
-          disabled={liked}
         >
           <FavoriteIcon style={liked ? { color: 'red' } : {}} />
         </IconButton>
