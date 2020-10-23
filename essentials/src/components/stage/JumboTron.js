@@ -136,7 +136,9 @@ export default function JumboTron({ publisher, datePublish, docId }) {
       .doc(`${docId}`)
       .update({
         likes: likes - 1,
-      }).then(() => setLiked(false))
+      }).then(() => {
+        setLikes(prev => prev--)
+        setLiked(false)})
     }else{
       setLiked(true);
       db.collection('videos')

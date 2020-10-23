@@ -4,7 +4,7 @@ import { makeStyles, fade } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { UserContext } from '../Contexts/UserContext';
+//import { UserContext } from '../Contexts/UserContext';
 import { SearchContext } from '../Contexts/SearchContext';
 import SkoolyIcon from '../../images/LogoSolo.png';
 import { auth } from '../../Firebase/Firebase';
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
-  const { currentUser } = useContext(UserContext);
+  //const { currentUser } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { search, setSearch } = useContext(SearchContext);
@@ -133,7 +133,7 @@ export default function PersistentDrawerLeft() {
             onClose={handleClose}
           >
             <Link to={`/profile/${localStorage.getItem("currentUser")}/${localStorage.getItem("email")}`}>
-              <MenuItem onClick={handleClose}>{currentUser}</MenuItem>
+              <MenuItem onClick={handleClose}>{localStorage.getItem("currentUser")}</MenuItem>
             </Link>
 
             <MenuItem onClick={handleLogOut}>Log-Out</MenuItem>

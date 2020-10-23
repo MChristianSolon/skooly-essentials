@@ -1,15 +1,19 @@
 .profile-page {
-  margin-top: 40px;
+  position: absolute;
+  margin-top: 30px;
+  height: 100%;
+  width: 100%;
 }
 .profile-photo {
   border-radius: 50%;
-  margin: auto;
+  margin-top: 20px;
+  margin-left: 50px;
   display: block;
   height: 200px;
 }
 
 .profile-name {
-  text-align: center;
+  margin-left: 95px;
 }
 
 .profile-savedPages {
@@ -23,4 +27,9 @@
 .profile-videos {
   margin: 200px;
   margin-top: 0px;
+}
+
+.myProfile__card {
+  margin: 50px;
+  background-image: url('https://picsum.photos/1920/1080');
 }
